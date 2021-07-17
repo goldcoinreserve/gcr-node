@@ -1,0 +1,217 @@
+nodeUseRemoteAccount: true
+privateKeySecurityMode: ENCRYPT
+nodePort: 7900
+enableCacheDatabaseStorage: true
+enableVerifiableState: true
+enableVerifiableReceipts: true
+initialCurrencyAtomicUnits: 3000000000000
+maxMosaicAtomicUnits: 120000000000000
+totalChainImportance: 3000000000000
+minHarvesterBalance: 1000000
+maxHarvesterBalance: 30000000000
+minVoterBalance: 5000000000
+blockGenerationTargetTime: 15s
+blockTimeSmoothingFactor: 3000
+importanceGrouping: 720
+importanceActivityPercentage: 0
+maxDifficultyBlocks: 60
+maxRollbackBlocks: 0
+maxTransactionLifetime: 24h
+maxBlockFutureTime: 500ms
+maxNamespaceDuration: 3650d
+namespaceGracePeriodDuration: 30d
+maxAccountRestrictionValues: 512
+maxMosaicRestrictionValues: 20
+maxMessageSize: 4096
+reservedRootNamespaceNames: 'gcr'
+defaultDynamicFeeMultiplier: 1000000
+minFeeMultiplier: 10
+maxTimeBehindPullTransactionsStart: 5m
+epochAdjustment: 1620136098s 
+nodeEqualityStrategy: host
+maxVotingKeyLifetime: 360
+minVotingKeyLifetime: 112
+mosaicRentalFee: 40
+votingSetGrouping: 1440
+maxVotingKeysPerAccount: 3
+maxTransactionsPerAggregate: 1000
+maxCosignaturesPerAggregate: 100
+harvestBeneficiaryPercentage: 15
+harvestNetworkPercentage: 10
+rootNamespaceRentalFeePerBlock: 1
+childNamespaceRentalFee: 100
+enableStrictCosignatureCheck: false
+enableBondedAggregateSupport: true
+maxBondedTransactionLifetime: 48h
+maxTransactionsPerBlock: 10000
+stepDuration: 2m
+minNamespaceDuration: 1m
+trustedHosts: 127.0.0.1
+localNetworks: 127.0.0.1
+lockedFundsPerAggregate: 10000000
+maxHashLockDuration: 2d
+maxSecretLockDuration: 30d
+minProofSize: 1
+maxProofSize: 4096
+maxValueSize: 1024
+maxMosaicsPerAccount: 100000
+maxMosaicDuration: 36500d
+maxMosaicDivisibility: 6
+maxMultisigDepth: 4
+maxCosignatoriesPerAccount: 1000
+maxCosignedAccountsPerAccount: 1000
+maxNameSize: 128
+maxChildNamespaces: 500
+maxNamespaceDepth: 3
+batchVerificationRandomSource:
+symbolServerToolsImage: symbolplatform/symbol-server:tools-gcc-1.0.0.0
+symbolServerImage: symbolplatform/symbol-server:gcc-1.0.0.0
+symbolRestImage: symbolplatform/symbol-rest:2.3.5
+symbolExplorerImage: symbolplatform/symbol-explorer:0.6.3-alpha
+symbolWalletImage: symbolplatform/symbol-desktop-wallet:1.0.1
+symbolFaucetImage: symbolplatform/symbol-faucet:0.5.0-alpha
+symbolAgentImage: symbolplatform/symbol-node-rewards-agent:1.0.2-alpha.0
+mongoImage: mongo:4.4.3-bionic
+mongoComposeRunParam: --wiredTigerCacheSizeGB 2
+logLevel: 'Info'
+# brokerLogLevel: 'Info'
+# recoveryLogLevel: 'Info'
+# serverLogLevel: 'Info'
+transactionsDirectory: './transactions'
+binDirectory: ./seed
+seedDirectory: ./seed
+certificateDirectory: ./cert
+dataDirectory: ./seed
+votingKeysDirectory: ./votingkeys
+enableDelegatedHarvestersAutoDetection: true
+catapultAppFolder: /usr/catapult
+
+# config database
+databaseName: catapult
+maxWriterThreads: 8
+maxDropBatchSize: 10
+writeTimeout: 10m
+
+#Peer List configuration
+peersP2PListLimit: 10
+peersApiListLimit: 10
+
+# config finalization
+shortLivedCacheMessageDuration: 10m
+messageSynchronizationMaxResponseSize: 20MB
+finalizationSize: 10000
+finalizationThreshold: 7000
+maxHashesPerPoint: 256
+prevoteBlocksMultiple: 4
+nonVotingUnfinalizedBlocksDuration: 8m
+votingUnfinalizedBlocksDuration: 0m
+
+# config messages:
+subscriberPort: 7902
+messagingListenInterface: 0.0.0.0
+
+# network height
+networkheight: false
+networkHeightMaxNodes: 5
+
+# partialtransactions
+partialTransactionsCacheMaxResponseSize: 5MB
+partialTransactionsCacheMaxSize: 20MB
+
+# time synchronization
+timeSynchronizationMaxNodes: 20
+timeSynchronizationMinImportance: 3750
+
+# node default info
+maxIncomingConnectionsPerIdentity: 6
+enableAddressReuse: false
+nodeListenInterface: 0.0.0.0
+serverVersion: 1.0.0.0
+enableTransactionSpamThrottling: true
+transactionSpamThrottlingMaxBoostFee: 10000000
+maxHashesPerSyncAttempt: 370
+maxBlocksPerSyncAttempt: 360
+maxChainBytesPerSyncAttempt: 100MB
+shortLivedCacheTransactionDuration: 10m
+shortLivedCacheBlockDuration: 100m
+shortLivedCachePruneInterval: 90s
+shortLivedCacheMaxSize: 10000000
+transactionSelectionStrategy: maximize-fee
+unconfirmedTransactionsCacheMaxResponseSize: 20MB
+unconfirmedTransactionsCacheMaxSize: 20MB
+connectTimeout: 15s
+syncTimeout: 20m
+socketWorkingBufferSize: 512KB
+socketWorkingBufferSensitivity: 100
+maxPacketDataSize: 150MB
+blockDisruptorSlotCount: 4096
+blockDisruptorMaxMemorySize: 300MB
+blockElementTraceInterval: 1
+transactionDisruptorSlotCount: 8192
+transactionDisruptorMaxMemorySize: 20MB
+transactionElementTraceInterval: 10
+enableDispatcherAbortWhenFull: false
+enableDispatcherInputAuditing: false
+maxTrackedNodes: 5'000
+enableAutoHarvesting: true
+fileDatabaseBatchSize: 1
+maxUnlockedAccounts: 10
+delegatePrioritizationPolicy: Importance
+dockerComposeVersion: '2.4'
+dockerComposeServiceRestart: 'on-failure:2'
+dockerComposeDebugMode: false
+
+maxPartnerNodeVersion: 1.0.255.255
+minPartnerNodeVersion: 1.0.0.0
+
+outgoing_connections_maxConnections: 10
+outgoing_connections_maxConnectionAge: 200
+outgoing_connections_maxConnectionBanAge: 20
+outgoing_connections_numConsecutiveFailuresBeforeBanning: 3
+
+incoming_connections_maxConnections: 512
+incoming_connections_maxConnectionAge: 200
+incoming_connections_maxConnectionBanAge: 20
+incoming_connections_numConsecutiveFailuresBeforeBanning: 3
+incoming_connections_backlogSize: 512
+
+defaultBanDuration: 12h
+maxBanDuration: 72h
+keepAliveDuration: 48h
+maxBannedNodes: 5000
+numReadRateMonitoringBuckets: 4
+readRateMonitoringBucketDuration: 15s
+maxReadRateMonitoringTotalSize: 100MB
+minTransactionFailuresCountForBan: 8
+minTransactionFailuresPercentForBan: 10
+
+#Rocksdb
+enableStatistics: false
+maxOpenFiles: 0
+maxBackgroundThreads: 0
+maxSubcompactionThreads: 0
+blockCacheSize: 0MB
+memtableMemoryBudget: 0MB
+maxWriteBatchSize: 5MB
+
+#Rest
+throttlingBurst: 80
+throttlingRate: 60
+restLoggingFilename: /symbol-workdir/logs/catapult-rest.log
+apiNodeConfigPath: /symbol-workdir/api-node-config
+subnet: '172.20.0.0/24'
+apiNodePort: 7900
+apiNodeTimeout: 1000
+apiNodeBrokerPort: 7902
+apiNodeBrokerPortMonitorInterval: 500
+apiNodeBrokerConnectTimeout: 10000
+apiNodeBrokerMonitorLoggingThrottle: 60000
+maxConnectionAttempts: 15
+baseRetryDelay: 750
+connectionPoolSize: 10
+maxSubscriptions: 300
+
+#voting
+votingKeyStartEpoch: 1
+votingKeyEndEpoch: 360
+enableRevoteOnBoot: true
