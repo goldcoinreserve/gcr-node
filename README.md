@@ -237,7 +237,7 @@ In case the node can't find any node to transmit transaction, you may set an ext
 
 
 ```
-gcr-node link --url=http://127.0.0.1:3000
+gcr-node link --url=http://20.79.16.203:3000
 ```
 
 
