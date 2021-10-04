@@ -34,6 +34,7 @@ minVotingKeyLifetime: 112
 mosaicRentalFee: 40
 votingSetGrouping: 1440
 maxVotingKeysPerAccount: 3
+autoUpdateVotingKeys: true
 maxTransactionsPerAggregate: 1000
 maxCosignaturesPerAggregate: 100
 harvestBeneficiaryPercentage: 15
@@ -51,7 +52,7 @@ localNetworks: 127.0.0.1
 lockedFundsPerAggregate: 10000000
 maxHashLockDuration: 2d
 maxSecretLockDuration: 30d
-minProofSize: 1
+minProofSize: 20
 maxProofSize: 4096
 maxValueSize: 1024
 maxMosaicsPerAccount: 100000
@@ -64,13 +65,12 @@ maxNameSize: 128
 maxChildNamespaces: 500
 maxNamespaceDepth: 3
 batchVerificationRandomSource:
-symbolServerToolsImage: symbolplatform/symbol-server:tools-gcc-1.0.0.0
-symbolServerImage: symbolplatform/symbol-server:gcc-1.0.0.0
-symbolRestImage: symbolplatform/symbol-rest:2.3.5
+symbolServerImage: symbolplatform/symbol-server:gcc-10-1.0.2.0
+symbolRestImage: symbolplatform/symbol-rest:2.3.6
 symbolExplorerImage: symbolplatform/symbol-explorer:0.6.3-alpha
 symbolWalletImage: symbolplatform/symbol-desktop-wallet:1.0.1
 symbolFaucetImage: symbolplatform/symbol-faucet:0.5.0-alpha
-symbolAgentImage: symbolplatform/symbol-node-rewards-agent:1.0.2-alpha.0
+symbolAgentImage: symbolplatform/symbol-node-rewards-agent:2.0.0
 mongoImage: mongo:4.4.3-bionic
 mongoComposeRunParam: --wiredTigerCacheSizeGB 2
 logLevel: 'Info'
@@ -85,6 +85,9 @@ dataDirectory: ./seed
 votingKeysDirectory: ./votingkeys
 enableDelegatedHarvestersAutoDetection: true
 catapultAppFolder: /usr/catapult
+rewardProgramAgentPort: 7881
+enableRevoteOnBoot: true
+totalVotingBalanceCalculationFix: 0
 
 # config database
 databaseName: catapult
@@ -100,11 +103,12 @@ peersApiListLimit: 10
 shortLivedCacheMessageDuration: 10m
 messageSynchronizationMaxResponseSize: 20MB
 finalizationSize: 10000
-finalizationThreshold: 7000
+finalizationThreshold: 6700
 maxHashesPerPoint: 256
 prevoteBlocksMultiple: 4
 nonVotingUnfinalizedBlocksDuration: 8m
 votingUnfinalizedBlocksDuration: 0m
+voting: true
 
 # config messages:
 subscriberPort: 7902
@@ -126,7 +130,6 @@ timeSynchronizationMinImportance: 3750
 maxIncomingConnectionsPerIdentity: 6
 enableAddressReuse: false
 nodeListenInterface: 0.0.0.0
-serverVersion: 1.0.0.0
 enableTransactionSpamThrottling: true
 transactionSpamThrottlingMaxBoostFee: 10000000
 maxHashesPerSyncAttempt: 370
@@ -141,8 +144,10 @@ unconfirmedTransactionsCacheMaxResponseSize: 20MB
 unconfirmedTransactionsCacheMaxSize: 20MB
 connectTimeout: 15s
 syncTimeout: 20m
-socketWorkingBufferSize: 512KB
-socketWorkingBufferSensitivity: 100
+enableSingleThreadPool: false
+sinkType: Async
+socketWorkingBufferSize: 16KB
+socketWorkingBufferSensitivity: 1
 maxPacketDataSize: 150MB
 blockDisruptorSlotCount: 4096
 blockDisruptorMaxMemorySize: 300MB
@@ -160,10 +165,9 @@ delegatePrioritizationPolicy: Importance
 dockerComposeVersion: '2.4'
 dockerComposeServiceRestart: 'on-failure:2'
 dockerComposeDebugMode: false
-
+minPartnerNodeVersion: 1.0.1.0
 maxPartnerNodeVersion: 1.0.255.255
-minPartnerNodeVersion: 1.0.0.0
-
+serverVersion: 1.0.2.0
 outgoing_connections_maxConnections: 10
 outgoing_connections_maxConnectionAge: 200
 outgoing_connections_maxConnectionBanAge: 20
@@ -210,8 +214,5 @@ maxConnectionAttempts: 15
 baseRetryDelay: 750
 connectionPoolSize: 10
 maxSubscriptions: 300
-
-#voting
-votingKeyStartEpoch: 1
-votingKeyEndEpoch: 360
-enableRevoteOnBoot: true
+restExtensions: 'accountLink, aggregate, lockHash, lockSecret, mosaic, metadata, multisig, namespace, receipts, restrictions, transfer, cmc'
+restDeploymentTool: gcr-node

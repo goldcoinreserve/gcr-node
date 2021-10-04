@@ -82,11 +82,16 @@ export enum DebugLevel {
     max = 'Max',
 }
 
+export enum SinkType {
+    async = 'Async',
+    sync = 'Sync',
+}
+
 export interface NodeConfigPreset {
     syncsource: boolean;
     filespooling: boolean;
     partialtransaction: boolean;
-    sinkType: 'Async' | 'Sync';
+    sinkType: SinkType;
     enableSingleThreadPool: boolean;
     addressextraction: boolean;
     mongo: boolean;
@@ -243,6 +248,7 @@ export interface NodeConfigPreset {
     maxProofSize: number;
     maxTransactionsPerBlock: number;
     localNetworks: string;
+    rewardProgramAgentPort: number;
 }
 
 export interface NodePreset extends DockerServicePreset, Partial<NodeConfigPreset> {
@@ -269,6 +275,9 @@ export interface NodePreset extends DockerServicePreset, Partial<NodeConfigPrese
 
     vrfPrivateKey?: string;
     vrfPublicKey?: string;
+
+    agentPrivateKey?: string;
+    agentPublicKey?: string;
 
     //Broker specific
     brokerName?: string;
@@ -306,6 +315,9 @@ export interface GatewayConfigPreset {
     maxSubscriptions: number;
     apiNodeTimeout: number;
     baseRetryDelay: number;
+    restDeploymentTool: string;
+    restDeploymentToolVersion?: string; // default is dynamic, current bootstrap version
+    restDeploymentToolLastUpdatedDate?: string; // default is dynamic, current datetime
 }
 
 export interface GatewayPreset extends DockerServicePreset, Partial<GatewayConfigPreset> {
@@ -365,7 +377,7 @@ export interface CommonConfigPreset extends NodeConfigPreset, GatewayConfigPrese
     preset: Preset;
     assembly: string;
     assemblies?: string;
-    privateKeySecurityMode: string;
+    privateKeySecurityMode?: string;
     votingKeysDirectory: string;
     sinkAddress?: string;
     epochAdjustment: string;
@@ -376,7 +388,6 @@ export interface CommonConfigPreset extends NodeConfigPreset, GatewayConfigPrese
     faucetUrl?: string;
     nemesisSeedFolder?: string; // Optional seed folder if user provides an external seed/00000 folder.
 
-    symbolServerToolsImage: string;
     symbolWalletImage: string;
     symbolServerImage: string;
     symbolExplorerImage: string;
@@ -387,8 +398,6 @@ export interface CommonConfigPreset extends NodeConfigPreset, GatewayConfigPrese
     dockerComposeVersion: number | string;
     dockerComposeServiceRestart: string;
     dockerComposeDebugMode: boolean;
-    votingKeyEndEpoch: number;
-    votingKeyStartEpoch: number;
     mongoComposeRunParam: string;
     peersP2PListLimit: number;
     peersApiListLimit: number;
@@ -405,10 +414,14 @@ export interface CommonConfigPreset extends NodeConfigPreset, GatewayConfigPrese
     currencyMosaicId: string;
     harvestingMosaicId: string;
     baseNamespace: string;
-    rewardProgramControllerPublicKey?: string;
+    rewardProgramEnrollmentAddress?: string;
     networkType: NetworkType;
+    votingKeyDesiredLifetime: number;
+    votingKeyDesiredFutureLifetime: number; // How in the future voting key files need to be generated. By default, 1 months before expiring..
+    useExperimentalNativeVotingKeyGeneration?: boolean;
+    lastKnownNetworkEpoch: number;
+    autoUpdateVotingKeys: boolean;
     //Nested Objects
-
     knownRestGateways?: string[];
     inflation?: Record<string, number>;
     knownPeers?: Record<NodeType, PeerInfo[]>;

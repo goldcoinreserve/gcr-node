@@ -23,13 +23,9 @@ sinkAddress: NDJLSTXEVVYQG7WTVWG6DWRT5PGFZFPERVOGR2Q
 harvestNetworkFeeSinkAddress: NADUFPNOSLCURLORBP2ZM3G6WDPULX6NZVP4GRQ
 mosaicRentalFeeSinkAddress: NC4NYX7ERIJSSB2QLI4FODKMGBBEGU4LADCIQQQ
 namespaceRentalFeeSinkAddress: NDJLSTXEVVYQG7WTVWG6DWRT5PGFZFPERVOGR2Q
-faucetUrl: ''
-symbolServerToolsImage: symbolplatform/symbol-server:tools-gcc-1.0.0.0
-symbolServerImage: symbolplatform/symbol-server:gcc-1.0.0.0
-symbolRestImage: symbolplatform/symbol-rest:2.3.5
-minPartnerNodeVersion: 1.0.0.0
+minPartnerNodeVersion: 1.0.1.0
 maxPartnerNodeVersion: 1.0.255.255
-serverVersion: 1.0.0.0
+serverVersion: 1.0.2.0
 knownRestGateways:
     - 'http://20.79.16.203:3000'
     - 'http://20.79.16.206:3000'

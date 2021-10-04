@@ -32,8 +32,8 @@ import * as Handlebars from 'handlebars';
 import { get } from 'https';
 import * as _ from 'lodash';
 import { platform, totalmem } from 'os';
-import { basename, join, resolve } from 'path';
-import { Convert, Deadline, DtoMapping, LinkAction, NetworkType, Transaction, UInt64, VotingKeyLinkTransaction } from 'symbol-sdk';
+import { basename, dirname, join, resolve } from 'path';
+import { Convert, DtoMapping, NetworkType } from 'symbol-sdk';
 import * as util from 'util';
 import { LogType } from '../logger';
 import Logger from '../logger/Logger';
@@ -309,25 +309,6 @@ export class BootstrapUtils {
         });
     }
 
-    public static createVotingKeyTransaction(
-        shortPublicKey: string,
-        action: LinkAction,
-        presetData: { networkType: NetworkType; votingKeyStartEpoch: number; votingKeyEndEpoch: number },
-        deadline: Deadline,
-        maxFee: UInt64,
-    ): Transaction {
-        return VotingKeyLinkTransaction.create(
-            deadline,
-            shortPublicKey,
-            presetData.votingKeyStartEpoch,
-            presetData.votingKeyEndEpoch,
-            action,
-            presetData.networkType,
-            1,
-            maxFee,
-        );
-    }
-
     public static poll(promiseFunction: () => Promise<boolean>, totalPollingTime: number, pollIntervalMs: number): Promise<boolean> {
         const startTime = new Date().getMilliseconds();
         return promiseFunction().then(async (result) => {
@@ -378,7 +359,13 @@ export class BootstrapUtils {
                         if (isMustache) {
                             const template = await BootstrapUtils.readTextFile(fromPath);
                             const renderedTemplate = this.runTemplate(template, templateContext);
-                            await fsPromises.writeFile(destinationFile, renderedTemplate);
+
+                            await fsPromises.writeFile(
+                                destinationFile,
+                                destinationFile.toLowerCase().endsWith('.json')
+                                    ? BootstrapUtils.formatJson(renderedTemplate)
+                                    : renderedTemplate,
+                            );
                         } else {
                             await fsPromises.copyFile(fromPath, destinationFile);
                         }
@@ -392,6 +379,21 @@ export class BootstrapUtils {
         );
     }
 
+    public static async chmodRecursive(path: string, mode: string | number): Promise<void> {
+        // Loop through all the files in the config folder
+        const stat = await fsPromises.stat(path);
+        if (stat.isFile()) {
+            await fsPromises.chmod(path, mode);
+        } else if (stat.isDirectory()) {
+            const files = await fsPromises.readdir(path);
+            await Promise.all(
+                files.map(async (file: string) => {
+                    await this.chmodRecursive(join(path, file), mode);
+                }),
+            );
+        }
+    }
+
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public static runTemplate(template: string, templateContext: any): string {
         const compiledTemplate = Handlebars.compile(template);
@@ -400,6 +402,13 @@ export class BootstrapUtils {
 
     public static async mkdir(path: string): Promise<void> {
         await fsPromises.mkdir(path, { recursive: true });
+    }
+
+    public static async mkdirParentFolder(fileName: string): Promise<void> {
+        const parentFolder = dirname(fileName);
+        if (parentFolder) {
+            await BootstrapUtils.mkdir(parentFolder);
+        }
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -457,6 +466,7 @@ export class BootstrapUtils {
     }
 
     public static async writeTextFile(path: string, text: string): Promise<void> {
+        await BootstrapUtils.mkdirParentFolder(path);
         await fsPromises.writeFile(path, text, 'utf8');
     }
 
@@ -610,6 +620,7 @@ export class BootstrapUtils {
         Handlebars.registerHelper('toSimpleHex', BootstrapUtils.toSimpleHex);
         Handlebars.registerHelper('toSeconds', BootstrapUtils.toSeconds);
         Handlebars.registerHelper('toJson', BootstrapUtils.toJson);
+        Handlebars.registerHelper('splitCsv', BootstrapUtils.splitCsv);
         Handlebars.registerHelper('add', BootstrapUtils.add);
         Handlebars.registerHelper('minus', BootstrapUtils.minus);
         Handlebars.registerHelper('computerMemory', BootstrapUtils.computerMemory);
@@ -658,6 +669,15 @@ export class BootstrapUtils {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public static toJson(object: any): string {
         return JSON.stringify(object, null, 2);
+    }
+
+    public static formatJson(string: string): string {
+        // Validates and format the json string.
+        return JSON.stringify(JSON.parse(string), null, 2);
+    }
+
+    public static splitCsv(object: string): string[] {
+        return (object || '').split(',').map((c) => c.trim());
     }
 
     public static toSeconds(serverDuration: string): number {

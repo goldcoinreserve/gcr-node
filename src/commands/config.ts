@@ -15,8 +15,7 @@
  */
 
 import { Command, flags } from '@oclif/command';
-import { BootstrapService, BootstrapUtils, ConfigService, Preset } from '../service';
-import { CommandUtils } from '../service/CommandUtils';
+import { BootstrapService, BootstrapUtils, CommandUtils, ConfigService, Preset } from '../service';
 
 export default class Config extends Command {
     static description = 'Command used to set up the configuration files and the nemesis block for the current network';
@@ -26,27 +25,31 @@ export default class Config extends Command {
         `$ gcr-node config -p testnet -a dual --password 1234`,
         `$ echo "$MY_ENV_VAR_PASSWORD" | gcr-node config -p testnet -a dual`,
     ];
-
-    static flags = {
+    //@typescript-eslint/explicit-module-boundary-types
+    static resolveFlags = (required: boolean) => ({
         help: CommandUtils.helpFlag,
         target: CommandUtils.targetFlag,
         password: CommandUtils.passwordFlag,
         noPassword: CommandUtils.noPasswordFlag,
         preset: flags.enum({
             char: 'p',
-            description: 'the network preset',
+            description: `The network preset, can be provided via custom preset or cli parameter. ${
+                required ? '' : 'If not provided, the value is resolved from the target/preset.yml file.'
+            }`,
             options: Object.keys(Preset).map((v) => v as Preset),
-            default: ConfigService.defaultParams.preset,
+            required: required,
         }),
         assembly: flags.string({
             char: 'a',
-            description: 'An optional assembly type, example "dual" for testnet',
+            description: `The assembly, example "dual" for testnet. ${
+                required ? '' : 'If not provided, the value is resolved from the target/preset.yml file.'
+            }`,
+            required: required,
         }),
-
         customPreset: flags.string({
             char: 'c',
-            description: 'External preset file. Values in this file will override the provided presets (optional)',
-            required: false,
+            description: `External preset file. Values in this file will override the provided presets`,
+            required: required,
         }),
         reset: flags.boolean({
             char: 'r',
@@ -64,18 +67,14 @@ export default class Config extends Command {
             default: ConfigService.defaultParams.report,
         }),
 
-        pullImages: flags.boolean({
-            description:
-                'It pulls the utility images from DockerHub when running the configuration. It only affects alpha/dev docker images.',
-            default: ConfigService.defaultParams.pullImages,
-        }),
-
         user: flags.string({
             char: 'u',
             description: `User used to run docker images when creating configuration files like certificates or nemesis block. "${BootstrapUtils.CURRENT_USER}" means the current user.`,
             default: BootstrapUtils.CURRENT_USER,
         }),
-    };
+    });
+
+    static flags = Config.resolveFlags(false);
 
     public async run(): Promise<void> {
         const { flags } = this.parse(Config);
