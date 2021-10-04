@@ -356,5 +356,7 @@ General users should install this tool like any other node module.
 * [`gcr-node run`](docs/run.md) - It boots the network via docker using the generated `docker-compose.yml` file and configuration. The config and compose methods/commands need to be called before this method. This is just a wrapper for the `docker-compose up` bash call.
 * [`gcr-node start`](docs/start.md) - Single command that aggregates config, compose and run in one line!
 * [`gcr-node stop`](docs/stop.md) - It stops the docker-compose network if running (gcr-node started with --detached). This is just a wrapper for the `docker-compose down` bash call.
+* [`gcr-node updateVotingKeys`](docs/updateVotingKeys.md) - It updates the voting files containing the voting keys when required.
+* [`gcr-node verify`](docs/verify.md) - It tests the installed software in the current computer reporting if there is any missing dependency, invalid version, or software related issue.
 
 <!-- commandsstop -->
