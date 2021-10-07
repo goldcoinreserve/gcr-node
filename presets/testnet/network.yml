@@ -26,6 +26,34 @@ namespaceRentalFeeSinkAddress: NDJLSTXEVVYQG7WTVWG6DWRT5PGFZFPERVOGR2Q
 minPartnerNodeVersion: 1.0.1.0
 maxPartnerNodeVersion: 1.0.255.255
 serverVersion: 1.0.2.0
+currencyName: currency
+harvestingName: currency
+epochAdjustment: 1616694977s
+enableRevoteOnBoot: false
+importanceGrouping: 720
+# votingKeyDesiredFutureLifetime: 120
+# lastKnownNetworkEpoch: 235
+minVotingKeyLifetime: 112
+maxVotingKeyLifetime: 360
+# stepDuration: 4m
+maxBlockFutureTime: 500ms
+maxAccountRestrictionValues: 512
+defaultDynamicFeeMultiplier: 100000
+rootNamespaceRentalFeePerBlock: 2
+childNamespaceRentalFee: 100
+# totalVotingBalanceCalculationFix: 398520
+mosaicRentalFee: 40
+throttlingBurst: 180
+throttlingRate: 160
+fileDatabaseBatchSize: 1 
+minProofSize: 1
+syncTimeout: 5m
+maxChildNamespaces: 500
+nonVotingUnfinalizedBlocksDuration: 10m
+votingUnfinalizedBlocksDuration: 0m
+timeSynchronizationMinImportance: 10000000000
+
+restExtensions: 'accountLink, aggregate, lockHash, lockSecret, mosaic, metadata, multisig, namespace, receipts, restrictions, transfer, cmc'
 knownRestGateways:
     - 'http://20.79.16.203:3000'
     - 'http://20.79.16.206:3000'
