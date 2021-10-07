@@ -31,17 +31,18 @@ harvestingName: currency
 epochAdjustment: 1616694977s
 enableRevoteOnBoot: false
 importanceGrouping: 720
-# votingKeyDesiredFutureLifetime: 120
-# lastKnownNetworkEpoch: 235
+votingKeyDesiredLifetime: 720
+votingKeyDesiredFutureLifetime: 120
+lastKnownNetworkEpoch: 235
 minVotingKeyLifetime: 112
 maxVotingKeyLifetime: 360
-# stepDuration: 4m
+stepDuration: 4m
 maxBlockFutureTime: 500ms
 maxAccountRestrictionValues: 512
 defaultDynamicFeeMultiplier: 100000
 rootNamespaceRentalFeePerBlock: 2
 childNamespaceRentalFee: 100
-# totalVotingBalanceCalculationFix: 398520
+totalVotingBalanceCalculationFix: 398520
 mosaicRentalFee: 40
 throttlingBurst: 180
 throttlingRate: 160
