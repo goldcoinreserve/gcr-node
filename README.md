@@ -12,8 +12,6 @@ Tool that allows you creating, configuring and running gcr&#39;s complete networ
 * [Step-by-step](#step-by-step)
 * [Usage](#usage)
 * [Enabling harvesting](#enabling-harvesting)
-* [E2E Testing support](#e2e-testing-support)
-* [Development](#development)
 * [Command Topics](#command-topics)
 <!-- tocstop -->
 
@@ -25,7 +23,7 @@ Tool that allows you creating, configuring and running gcr&#39;s complete networ
 -   The configuration is parametrized via CLI commands and presets instead of by changing properties files.
 -   The tools code is unique for any type of network, new networks or nodes in a network. It doesn't need to be copied and pasted in different projects or assemblies.
 -   The config command runs on the host machine, not via docker making it easier to debug or tune
--   It's uses the TS SDK for key generation, vrf transactions, address generation instead of using catapult-tools (nemgen is still used to generate the nemesis block).
+-   It's uses the TS SDK for key generation, vrf transactions, address generation.
 -   Easier to maintain, the properties files are reused for all nodes, assemblies and network types.
 -   Network setup (how many database, nodes, rest gateways to run) is defined in presets, users can provide their own ones.
 -   Docker-compose yaml files are generated based on the network setup/preset instead of being manually created/upgraded.
@@ -43,7 +41,7 @@ Yaml files that define the configuration and layout of the network and nodes. It
 Presets are defined at 4 levels from general to specific:
 
 -   Shared: Default configurations for all the networks.
--   Network: It defines the main preset of a given network, example: `bootstrap` or `testnet`.
+-   Network: It defines the main preset of a given network, example: `mainnet` or `testnet`.
 -   Assembly: It defines a modification of a network, example: `testnet peer`, `tesnet dual`, `testnet api`. Assembly is required for some networks (like `testnet`).
 -   Custom: A user provided yml file (`--customPreset` param) that could override some or all properties in the out-of-the-box presets.
 
@@ -72,7 +70,7 @@ The folder where the generated config, docker files and data are stored. The fol
 # Intro
 
 -   Tested well on Ubuntu 18.04 TLS
--   Don't run under root, run under power user:
+-   Don't run under root, run under super user:
 
 ```
 adduser powerusername
@@ -136,22 +134,11 @@ Got permission denied while trying to connect to the Docker daemon socket at uni
 
 Try to logout and login, or please follow this [guide](https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket).
 
-Get gcr Node:
+Get gcr-node:
 
 ```
-cd /home/powerusername
-git clone https://github.com/goldcoinreserve/gcr-node.git
+npm install -g @goldcoinreserve/gcr-node
 ```
-
-Install gcr node
-
-```
-cd gcr-node
-npm i
-npm install -g
-cd ..
-```
-Logout and Login
 
 # Usage
 
@@ -165,11 +152,10 @@ cd node
 ```
 
 Create node custom name:
-
 ```
 cd ~/node`
 ```
-
+<b>NOTE:</b> friendlyName will be displayed in GCR explorer node list
 ```
 echo "nodes:
   -
@@ -177,37 +163,37 @@ echo "nodes:
 " > name.yml
 ```
 
-Once in the working dir:
 
-<!-- usage -->
-```sh-session
-$ npm install -g @goldcoinreserve/gcr-node
-$ gcr-node COMMAND
-running command...
-$ gcr-node (-v|--version|version)
-@goldcoinreserve/gcr-node/1.0.4 win32-x64 node-v12.19.0
-$ gcr-node --help [COMMAND]
-USAGE
-  $ gcr-node COMMAND
-...
-```
 <!-- usagestop -->
+<b>IMPORTANT: Before this step, please open 7900 and 3000 for communication with network</b>
 
-The general usage would be:
+
+To deploy GCR node you need to execute these commmand:
 
 ```
-gcr-node config -p mainnet -a dual --customPreset name.yml
+gcr-node start -p testnet -a dual --customPreset name.yml -d
+```
+<b>OR</b>
+```
+gcr-node comfig -p testnet -a dual --customPreset name.yml
 gcr-node compose
 gcr-node run -d
 ```
 
-IMPORTANT: Please open 7900 and 3000 for communication with network
 
-If you need to start fresh, you many need to sudo remove the target folder (docker volumes dirs may be created using sudo). Example:
+Please wait until you node will be fully synched with GCR network. After few minutes check node health:
+
+```
+curl http://localhost:3000/node/health
+```
+
+
+ <i> If you need to start fresh node, you many need to sudo remove the target folder (docker volumes dirs may be created using sudo). Example:
 
 ```
 sudo rm -rf ./target
 ```
+</i>
 
 # Enabling harvesting
 
@@ -241,100 +227,9 @@ gcr-node link --url=http://20.79.16.203:3000
 ```
 
 
-# E2E Testing support
 
-One use case of this CLI is client E2E testing support. If you are coding a gcr-node client, you (Travis or Jenkins) can run e2e tests like:
 
-```
-gcr-node start -p bootstrap --detached
-YOUR TEST (e.g: npm run test, gradle test, selenium etc.)
-gcr-node stop
-```
 
-`--detached` starts the server waiting until it is up (by polling the network http://localhost:3000/node/health). The command will fail if the components are not up in 30 seconds.
-
-You can also provide your own custom preset (`-c`) if you want your e2e test to start with a specific state (specific balances addresses, mosaics, namespaces, generation hash seed, etc.)
-
-## Node client E2E via CLI:
-
-The CLI can also be used as npm project (dev) dependency (`npm install --save-dev gcr-node`). Then you can integrate the network to your npm test cycle.
-Your `package.json` can look like this:
-
-```yaml
-
-"devDependencies": {
-    ....
-    "gcr-node": "0.0.x",
-    ....
-}
-
-scripts": {
-...
-    "clean-network": "gcr-node clean",
-    "run-network": "gcr-node start -c ./output/my_custom_preset.yml --detached --healthCheck",
-    "run-stop": "gcr-node stop",
-    "integration-test": "....some mocha/jest/etc tests running against localhost:3000 network....",
-    "e2e": "npm run clean-network && npm run run-network && npm run integration-test && npm run stop-network",
-...
-}
-```
-
-Then, you, Jenkins, Travis or your CI tool can run;
-
-```
-npm run e2e
-```
-
-## Node client E2E via API:
-
-Alternatively, you can use the [BootstrapService](https://github.com/goldcoinreserve/gcr-node/blob/main/src/service/BootstrapService.ts) facade to programmatically start and stop a server.
-
-Example:
-
-```ts
-import {BootstrapService, StartParams, Preset} from 'gcr-node'; 
-import {expect} from '@oclif/test'; 
-
-it('Bootstrap e2e test', async () => {
-    const service = new BootstrapService();
-    const config: StartParams = {
-        preset: Preset.bootstrap,
-        reset: true,
-        healthCheck: true,
-        timeout: 60000 * 5,
-        target: 'target/bootstrap-test',
-        detached: true,
-        user: 'current',
-    };
-    try {
-        await service.stop(config);
-        const configResult = await service.start(config);
-        expect(configResult.presetData).not.null;
-        expect(configResult.addresses).not.null;
-        // Here you can write unit tests against a http://localhost:3000 network
-    } finally {
-        await service.stop(config);
-    }
-});
-```
-
-It's recommended to reuse the same server for multiple tests by using `beforeAll`, `afterAll` kind of statements.
-
-# Development
-
-If you want to contribute to this tool, clone this repo and run:
-
-```
-npm i
-npm install -g
-```
-
-Then, `gcr-node` runs from the source code. You can now try your features after changing the code.
-
-Pull Requests are appreciated! Please follow the contributing [guidelines](CONTRIBUTING.md).
-
-Note: cloning this repo is only for people that want to tune the tool in a way it cannot be configured. If this is your case, please provide a feature request.
-General users should install this tool like any other node module.
 
 
 
