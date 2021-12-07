@@ -15,23 +15,18 @@
  */
 
 import { Command, flags } from '@oclif/command';
-import { join } from 'path';
-import { LogType } from '../logger';
-import Logger from '../logger/Logger';
-import LoggerFactory from '../logger/LoggerFactory';
+import { LoggerFactory, System } from '../logger';
 import { ConfigPreset } from '../model';
 import { BootstrapUtils, CommandUtils, ConfigLoader, CryptoUtils, RemoteNodeService, VotingService } from '../service';
-
-const logger: Logger = LoggerFactory.getLogger(LogType.System);
 
 export default class UpdateVotingKeys extends Command {
     static description = `It updates the voting files containing the voting keys when required.
 
 If the node's current voting file has an end epoch close to the current network epoch, this command will create a new 'private_key_treeX.dat' that continues the current file.
 
-By default, bootstrap creates a new voting file once the current file reaches its last month. The current network epoch is resolved from the network or you can provide it with the \`finalizationEpoch\` param.
+By default, gcr-node creates a new voting file once the current file reaches its last month. The current network epoch is resolved from the network or you can provide it with the \`finalizationEpoch\` param.
 
-When a new voting file is created, Bootstrap will advise running the \`link\` command again.
+When a new voting file is created, gcr-node will advise running the \`link\` command again.
 
 `;
 
@@ -46,32 +41,39 @@ When a new voting file is created, Bootstrap will advise running the \`link\` co
             default: BootstrapUtils.CURRENT_USER,
         }),
         finalizationEpoch: flags.integer({
-            description: `The network's finalization epoch. It can be retrieved from the /chain/info rest endpoint. If not provided, the bootstrap known epoch is used.`,
+            description: `The network's finalization epoch. It can be retrieved from the /chain/info rest endpoint. If not provided, the gcr-node known epoch is used.`,
         }),
+        logger: CommandUtils.getLoggerFlag(...System),
     };
 
     public async run(): Promise<void> {
         const { flags } = this.parse(UpdateVotingKeys);
-        BootstrapUtils.showBanner();
+        CommandUtils.showBanner();
         const password = false;
         const target = flags.target;
-        const configLoader = new ConfigLoader();
+        const logger = LoggerFactory.getLogger(flags.logger);
+        const configLoader = new ConfigLoader(logger);
         const addressesLocation = configLoader.getGeneratedAddressLocation(target);
-        const root = this.config.root;
-        const existingPreset = configLoader.loadExistingPresetData(target, password);
-        const preset = existingPreset.preset;
-        if (!preset) {
-            throw new Error(`Network preset could not be resolved!`);
+        let presetData: ConfigPreset;
+        try {
+            const oldPresetData = configLoader.loadExistingPresetData(target, password);
+            presetData = configLoader.createPresetData({
+                workingDir: BootstrapUtils.defaultWorkingDir,
+                password: password,
+                oldPresetData,
+            });
+        } catch (e) {
+            throw new Error(
+                `Node's preset cannot be loaded. Have you provided the right --target? If you have, please rerun the 'config' command with --upgrade. Error: ${
+                    e.message || 'unknown'
+                }`,
+            );
         }
-        // Adds new shared/network properties to the existing preset. This is for upgrades..
-        const sharedPreset = BootstrapUtils.loadYaml(join(root, 'presets', 'shared.yml'), false);
-        const networkPreset = BootstrapUtils.loadYaml(`${root}/presets/${preset}/network.yml`, false);
-        const presetData = configLoader.mergePresets(sharedPreset, networkPreset, existingPreset) as ConfigPreset;
-
         const addresses = configLoader.loadExistingAddresses(target, password);
         const privateKeySecurityMode = CryptoUtils.getPrivateKeySecurityMode(presetData.privateKeySecurityMode);
 
-        const finalizationEpoch = flags.finalizationEpoch || (await new RemoteNodeService().resolveCurrentFinalizationEpoch(presetData));
+        const finalizationEpoch =
+            flags.finalizationEpoch || (await new RemoteNodeService(logger, presetData, false).resolveCurrentFinalizationEpoch());
 
         const votingKeyUpgrade = (
             await Promise.all(
@@ -80,7 +82,7 @@ When a new voting file is created, Bootstrap will advise running the \`link\` co
                     if (!nodeAccount) {
                         throw new Error(`There is not node in addresses at index ${index}`);
                     }
-                    return new VotingService({
+                    return new VotingService(logger, {
                         target,
                         user: flags.user,
                     }).run(presetData, nodeAccount, nodePreset, finalizationEpoch, true, false);
@@ -93,7 +95,7 @@ When a new voting file is created, Bootstrap will advise running the \`link\` co
                 CryptoUtils.removePrivateKeysAccordingToSecurityMode(addresses, privateKeySecurityMode),
                 undefined,
             );
-            logger.warn('Bootstrap has created new voting file(s). Review the logs!');
+            logger.warn('gcr-node has created new voting file(s). Review the logs!');
             logger.warn('');
         } else {
             logger.info('');

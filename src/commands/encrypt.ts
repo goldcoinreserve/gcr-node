@@ -17,18 +17,12 @@
 import { Command, flags } from '@oclif/command';
 import { existsSync } from 'fs';
 import { dirname } from 'path';
-import { LogType } from '../logger';
-import Logger from '../logger/Logger';
-import LoggerFactory from '../logger/LoggerFactory';
-import { BootstrapUtils, KnownError } from '../service';
-import { CommandUtils } from '../service/CommandUtils';
-import { CryptoUtils } from '../service/CryptoUtils';
-const logger: Logger = LoggerFactory.getLogger(LogType.System);
+import { BootstrapUtils, CommandUtils, CryptoUtils, KnownError, LoggerFactory, LogType } from '../';
 
 export default class Encrypt extends Command {
     static description = `It encrypts a yml file using the provided password. The source files would be a custom preset file, a preset.yml file or an addresses.yml.
 
-The main use case of this command is encrypting custom presets files. If your custom preset contains private keys, it's highly recommended to encrypt it and use provide --password when starting or configuring the node with Bootstrap.`;
+The main use case of this command is encrypting custom presets files. If your custom preset contains private keys, it's highly recommended to encrypt it and use provide --password when starting or configuring the node with gcr-node.`;
 
     static examples = [
         `
@@ -57,8 +51,9 @@ $ gcr-node start --password 1234 --preset testnet --assembly dual --customPreset
             required: true,
         }),
         password: CommandUtils.getPasswordFlag(
-            `The password to use to encrypt the source file into the destination file. Bootstrap prompts for a password by default, can be provided in the command line (--password=XXXX) or disabled in the command line (--noPassword).`,
+            `The password to use to encrypt the source file into the destination file. gcr-node prompts for a password by default, can be provided in the command line (--password=XXXX) or disabled in the command line (--noPassword).`,
         ),
+        logger: CommandUtils.getLoggerFlag(LogType.Console),
     };
 
     public async run(): Promise<void> {
@@ -70,7 +65,9 @@ $ gcr-node start --password 1234 --preset testnet --assembly dual --customPreset
         if (existsSync(flags.destination)) {
             throw new KnownError(`Destination file ${flags.destination} already exists!`);
         }
+        const logger = LoggerFactory.getLogger(flags.logger);
         const password = await CommandUtils.resolvePassword(
+            logger,
             flags.password,
             false,
             `Enter the password used to decrypt the source file into the destination file. Keep this password in a secure place!`,

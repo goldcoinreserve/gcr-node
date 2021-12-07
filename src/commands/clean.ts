@@ -15,8 +15,8 @@
  */
 
 import { Command } from '@oclif/command';
-import { BootstrapUtils } from '../service';
-import { CommandUtils } from '../service/CommandUtils';
+import { LoggerFactory, System } from '../logger';
+import { BootstrapUtils, CommandUtils } from '../service';
 
 export default class Clean extends Command {
     static description = 'It removes the target folder deleting the generated configuration and data';
@@ -26,11 +26,13 @@ export default class Clean extends Command {
     static flags = {
         help: CommandUtils.helpFlag,
         target: CommandUtils.targetFlag,
+        logger: CommandUtils.getLoggerFlag(...System),
     };
 
     public async run(): Promise<void> {
         const { flags } = this.parse(Clean);
-        BootstrapUtils.showBanner();
-        BootstrapUtils.deleteFolder(flags.target);
+        CommandUtils.showBanner();
+        const logger = LoggerFactory.getLogger(flags.logger);
+        BootstrapUtils.deleteFolder(logger, flags.target);
     }
 }

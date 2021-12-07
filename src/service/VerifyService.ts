@@ -15,6 +15,7 @@
  */
 import * as os from 'os';
 import * as semver from 'semver';
+import { Logger } from '../logger';
 import { BootstrapUtils } from './BootstrapUtils';
 export interface VerifyReport {
     platform: string;
@@ -43,7 +44,7 @@ export class VerifyService {
     private readonly expectedVersions: ExpectedVersions;
     public readonly semverOptions = { loose: true };
 
-    constructor(private readonly root = BootstrapUtils.resolveRootFolder(), expectedVersions: Partial<ExpectedVersions> = {}) {
+    constructor(private readonly logger: Logger, expectedVersions: Partial<ExpectedVersions> = {}) {
         this.expectedVersions = { ...defaultExpectedVersions, ...expectedVersions };
     }
 
@@ -109,7 +110,7 @@ export class VerifyService {
         const recommendationUrl = `https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket`;
 
         try {
-            const output = (await BootstrapUtils.exec(command)).stdout.trim();
+            const output = (await BootstrapUtils.exec(this.logger, command)).stdout.trim();
             const expectedText = 'Hello from Docker!';
             if (output.indexOf(expectedText) == -1) {
                 return {
@@ -134,14 +135,14 @@ export class VerifyService {
             return {
                 header,
                 message: `Your are running with the sudo user!`,
-                recommendation: `Either don't use sudo or create a non sudo user to run Bootstrap.`,
+                recommendation: `Either don't use sudo or create a non sudo user to run gcr-node.`,
             };
         }
         return { header, message: `Your are not the sudo user!` };
     }
 
     public async loadVersionFromCommand(command: string): Promise<string | undefined> {
-        return this.loadVersion((await BootstrapUtils.exec(command)).stdout.trim());
+        return this.loadVersion((await BootstrapUtils.exec(this.logger, command)).stdout.trim());
     }
 
     private async verifyInstalledApp(
