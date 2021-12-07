@@ -24,9 +24,6 @@ harvestNetworkFeeSinkAddress: NDZFSRL4IACBPBKW5DXUSMXONQASPQDIBBQ6X3Q
 mosaicRentalFeeSinkAddress: NBQBMWELF4C7EBIYKFSAFYCRHMV6XX22TOSSKYQ
 namespaceRentalFeeSinkAddress: NAJ5QY6PLJMYSTI7J5E7T6V7JB3T7JCU22GZCPI
 faucetUrl: ''
-symbolServerToolsImage: symbolplatform/symbol-server:tools-gcc-1.0.0.0
-symbolServerImage: symbolplatform/symbol-server:gcc-1.0.0.0
-symbolRestImage: symbolplatform/symbol-rest:2.3.5
 minPartnerNodeVersion: 1.0.0.0
 maxPartnerNodeVersion: 1.0.255.255
 serverVersion: 1.0.0.0
