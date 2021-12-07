@@ -87,7 +87,8 @@ enableDelegatedHarvestersAutoDetection: true
 catapultAppFolder: /usr/catapult
 rewardProgramAgentPort: 7881
 enableRevoteOnBoot: true
-totalVotingBalanceCalculationFix: 0
+totalVotingBalanceCalculationFix: 1
+treasuryReissuance: 1
 
 # config database
 databaseName: catapult
