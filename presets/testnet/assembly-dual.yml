@@ -2,7 +2,7 @@ databases:
     - name: 'db'
       openPort: false
 nodes:
-    - harvesting: false
+    - harvesting: true
       api: true
       name: 'node'
       databaseHost: 'db'
@@ -16,6 +16,7 @@ gateways:
       apiNodeName: 'node'
       apiNodeHost: 'node'
       apiNodeBrokerHost: 'broker'
+      description: 'catapult public test network'
       databaseHost: 'db'
       openPort: true
       ipv4_address: 172.20.0.25
@@ -23,7 +24,7 @@ httpsProxies:
     - name: 'https-proxy'
       excludeDockerService: true #disabled as default
       openPort: 3001
-      #domains: 'gcr-node.example.comgcr-node -> http://rest-gateway:3000'
+      #domains: 'symbol-node.example.com -> http://rest-gateway:3000'
       stage: 'production'
       webSocket: 'true'
       serverNamesHashBucketSize: 128
