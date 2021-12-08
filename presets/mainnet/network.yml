@@ -5,7 +5,6 @@ minHarvesterBalance: 1000000000
 maxHarvesterBalance: 30000000000000
 minVoterBalance: 5000000000000
 networkType: 104
-identifier: mainnet
 minNamespaceDuration: 1m
 assemblies: 'api, dual, peer'
 harvestBeneficiaryPercentage: 10
@@ -18,6 +17,10 @@ maxSecretLockDuration: 30d
 maxNamespaceDuration: 3650d
 namespaceGracePeriodDuration: 30d
 blockGenerationTargetTime: 15s
+lastKnownNetworkEpoch: 235
+treasuryReissuanceEpoch: 1
+treasuryReissuanceEpochIneligibleVoterAddresses: []
+treasuryReissuanceTransactionSignatures: []
 nemesisGenerationHashSeed: F3F3B13355484976A3216D703D9CE17AF7CDE05913302766F0BBA7278D6CD166
 nemesisSignerPublicKey: 171B945E9ABE561756BF53B999099F129D37D68A138C30CC5A1FCD3E3D622466
 sinkAddress: NDJLSTXEVVYQG7WTVWG6DWRT5PGFZFPERVOGR2Q
@@ -30,13 +33,10 @@ namespaceRentalFeeSinkAddress: NAJ5QY6PLJMYSTI7J5E7T6V7JB3T7JCU22GZCPI
 faucetUrl: ''
 minPartnerNodeVersion: 1.0.0.0
 maxPartnerNodeVersion: 1.0.255.255
-serverVersion: 1.0.0.0
-knownRestGateways:
-    - 'http://mainnet-dual-1.gcr.superhow.net:3000'
-    - 'http://mainnet-dual-2.gcr.superhow.net:3000'
-    - 'http://mainnet-dual-3.gcr.superhow.net:3000'
-
-trustedHosts:
+serverVersion: 1.0.3.1
+statisticsServiceUrl: 'http://stats-testnet.gcr.superhow.net'
+knownRestGateways: []
+knownPeers: []
 inflation:
     starting-at-height-1: 43000000
     starting-at-height-1048320: 43000000
@@ -280,76 +280,3 @@ inflation:
     starting-at-height-250548480: 1486400000
     starting-at-height-251596800: 1508700000
     starting-at-height-362880000: 0
-knownPeers:
-    api-node:
-        - publicKey: 9B9A704CB11724F9815DB61910CBB39C3F76A8CD8CC24A2900A2620F756786FA
-          endpoint:
-              host: mainnet-dual-1.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-dual1
-              roles: Api,Peer,Voting
-        - publicKey: 9D0488AD06F56C944617FFF88E1EB418E014D57C817EA21CE031C4EB364E7177
-          endpoint:
-              host: mainnet-dual-2.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-dual2
-              roles: Api,Peer,Voting
-        - publicKey: DB753B0E867147494D87CBB139EF58D071794CB51AE0A2237227DAD6C0DDAD7A
-          endpoint:
-              host: mainnet-dual-3.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-dual3
-              roles: Api,Peer,Voting
-    peer-node:
-        - publicKey: DF807E99D67716F4D6A0A861D5B1C3925DD57D84BD567CE7FE97FD258AC1A450
-          endpoint:
-              host: mainnet-peer-1.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-peer1
-              roles: Peer,Voting
-        - publicKey: 186389B39669DBB56996386F26E4F3BD57BE99988F4F02323935173529E8B8AF
-          endpoint:
-              host: mainnet-peer-2.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-peer2
-              roles: Peer,Voting
-        - publicKey: 80C05552F4942BFC4BAC986B7AD0FB5E4F1E112577F0DD7843280BCCA45F12CC
-          endpoint:
-              host: mainnet-peer-3.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-peer3
-              roles: Peer,Voting
-        - publicKey: DDED58D763545BEEFF18C232DB2307E472E6448315DDF0E6AE99647BB244DB82
-          endpoint:
-              host: mainnet-peer-4.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-peer4
-              roles: Peer,Voting
-        - publicKey: 9B9A704CB11724F9815DB61910CBB39C3F76A8CD8CC24A2900A2620F756786FA
-          endpoint:
-              host: mainnet-dual-1.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-dual1
-              roles: Api,Peer,Voting
-        - publicKey: 9D0488AD06F56C944617FFF88E1EB418E014D57C817EA21CE031C4EB364E7177
-          endpoint:
-              host: mainnet-dual-2.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-dual2
-              roles: Api,Peer,Voting
-        - publicKey: DB753B0E867147494D87CBB139EF58D071794CB51AE0A2237227DAD6C0DDAD7A
-          endpoint:
-              host: mainnet-dual-3.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-dual3
-              roles: Api,Peer,Voting

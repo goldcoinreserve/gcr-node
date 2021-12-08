@@ -18,6 +18,10 @@ maxSecretLockDuration: 30d
 maxNamespaceDuration: 3650d
 namespaceGracePeriodDuration: 30d
 blockGenerationTargetTime: 15s
+lastKnownNetworkEpoch: 235
+treasuryReissuanceEpoch: 1
+treasuryReissuanceEpochIneligibleVoterAddresses: []
+treasuryReissuanceTransactionSignatures: []
 nemesisGenerationHashSeed: AF4C3D9A0219EE1D8B048A52029A58B89C345653AF3A56CF985C95E40530ADD3
 nemesisSignerPublicKey: 7C27C88F51C4DB24CF290E7951DF188CDE76220DB080FB02C54F01233CF5FD0E
 sinkAddress: NDJLSTXEVVYQG7WTVWG6DWRT5PGFZFPERVOGR2Q
@@ -29,9 +33,6 @@ namespaceRentalFeeSinkAddressV1: TAXHVO2ODBITWC7YVAOC4QGHRM4U25AAOPM3ICI
 namespaceRentalFeeSinkAddress: TAXHVO2ODBITWC7YVAOC4QGHRM4U25AAOPM3ICI
 minPartnerNodeVersion: 1.0.1.0
 maxPartnerNodeVersion: 1.0.255.255
-serverVersion: 1.0.2.0
-currencyName: currency
-harvestingName: currency
 epochAdjustment: 1616694977s
 enableRevoteOnBoot: false
 importanceGrouping: 720
@@ -57,12 +58,11 @@ maxChildNamespaces: 500
 nonVotingUnfinalizedBlocksDuration: 10m
 votingUnfinalizedBlocksDuration: 0m
 timeSynchronizationMinImportance: 10000000000
-restExtensions: 'accountLink, aggregate, lockHash, lockSecret, mosaic, metadata, multisig, namespace, receipts, restrictions, transfer, cmc'
-knownRestGateways:
-    - 'http://testnet-dual-1.gcr.superhow.net:3000'
-    - 'http://testnet-dual-2.gcr.superhow.net:3000'
-
-trustedHosts:
+restExtensions: 'accountLink, aggregate, lockHash, lockSecret, mosaic, metadata, multisig, namespace, receipts, restrictions, transfer'
+serverVersion: 1.0.3.1
+statisticsServiceUrl: 'http://stats-testnet.gcr.superhow.net'
+knownRestGateways: []
+knownPeers: []
 inflation:
     starting-at-height-1: 43000000
     starting-at-height-1048320: 43000000
@@ -306,41 +306,3 @@ inflation:
     starting-at-height-250548480: 1486400000
     starting-at-height-251596800: 1508700000
     starting-at-height-362880000: 0
-knownPeers:
-    api-node:
-        - publicKey: 6FD2EB5958D829FB3A65BC418F6A38F39A140C90B74FE01EBF21961FBDB5B5B4
-          endpoint:
-              host: testnet-dual-1.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-dual1
-              roles: Api,Peer,Voting
-        - publicKey: 788759528FDD6CFF1D05C8572AB744563EE855E5DA919FA2FC2D3E0443097D4E
-          endpoint:
-              host: testnet-dual-2.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-dual2
-              roles: Api,Peer,Voting
-    peer-node:
-        - publicKey: 587346C1B0BEC3CF870087D17BB32A785CEA6757A9DA86EBD8A2C5917686206B
-          endpoint:
-              host: testnet-peer-1.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-peer1
-              roles: Peer,Voting
-        - publicKey: 6FD2EB5958D829FB3A65BC418F6A38F39A140C90B74FE01EBF21961FBDB5B5B4
-          endpoint:
-              host: testnet-dual-1.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-dual1
-              roles: Api,Peer,Voting
-        - publicKey: 788759528FDD6CFF1D05C8572AB744563EE855E5DA919FA2FC2D3E0443097D4E
-          endpoint:
-              host: testnet-dual-2.gcr.superhow.net
-              port: 7900
-          metadata:
-              name: gcr-dual2
-              roles: Api,Peer,Voting

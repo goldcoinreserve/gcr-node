@@ -10,6 +10,8 @@ totalChainImportance: 3000000000000000
 minHarvesterBalance: 1000000000
 maxHarvesterBalance: 30000000000000
 minVoterBalance: 5000000000000
+currencyName: currency
+harvestingName: currency
 blockGenerationTargetTime: 15s
 blockTimeSmoothingFactor: 3000
 importanceGrouping: 720
@@ -29,6 +31,8 @@ minFeeMultiplier: 10
 maxTimeBehindPullTransactionsStart: 5m
 epochAdjustment: 1638265052s 
 nodeEqualityStrategy: host
+votingKeyDesiredLifetime: 360
+votingKeyDesiredFutureLifetime: 60
 maxVotingKeyLifetime: 26280
 minVotingKeyLifetime: 112
 mosaicRentalFee: 500
@@ -65,13 +69,13 @@ maxNameSize: 128
 maxChildNamespaces: 500
 maxNamespaceDepth: 3
 batchVerificationRandomSource:
-symbolServerImage: symbolplatform/symbol-server:gcc-10-1.0.2.0
-symbolRestImage: symbolplatform/symbol-rest:2.3.6
-symbolExplorerImage: symbolplatform/symbol-explorer:0.6.3-alpha
+symbolServerImage: symbolplatform/symbol-server:gcc-10-1.0.3.1
+symbolRestImage: symbolplatform/symbol-rest:2.4.0
+symbolExplorerImage: symbolplatform/symbol-explorer:1.1.0-alpha
 symbolWalletImage: symbolplatform/symbol-desktop-wallet:1.0.1
-symbolFaucetImage: symbolplatform/symbol-faucet:0.5.0-alpha
-symbolAgentImage: symbolplatform/symbol-node-rewards-agent:2.0.0
+symbolFaucetImage: symbolplatform/symbol-faucet:1.0.1-alpha
 mongoImage: mongo:4.4.3-bionic
+httpsPortalImage: steveltn/https-portal:1.19
 mongoComposeRunParam: --wiredTigerCacheSizeGB 2
 logLevel: 'Info'
 # brokerLogLevel: 'Info'
@@ -215,5 +219,14 @@ maxConnectionAttempts: 15
 baseRetryDelay: 750
 connectionPoolSize: 10
 maxSubscriptions: 300
-restExtensions: 'accountLink, aggregate, lockHash, lockSecret, mosaic, metadata, multisig, namespace, receipts, restrictions, transfer, cmc'
+restExtensions: 'accountLink, aggregate, lockHash, lockSecret, mosaic, metadata, multisig, namespace, receipts, restrictions, transfer'
 restDeploymentTool: gcr-node
+restUncirculatingAccountPublicKeys: ''
+restProtocol: HTTP
+restSSLPath: '/symbol-workdir'
+restSSLKeyFileName: 'restSSL.key'
+restSSLCertificateFileName: 'restSSL.crt'
+statisticsServicePeerFilter: ''
+statisticsServicePeerLimit: 50
+statisticsServiceRestFilter: suggested
+statisticsServiceRestLimit: 10
