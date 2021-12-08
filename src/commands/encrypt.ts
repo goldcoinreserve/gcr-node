@@ -28,7 +28,7 @@ const logger: Logger = LoggerFactory.getLogger(LogType.System);
 export default class Encrypt extends Command {
     static description = `It encrypts a yml file using the provided password. The source files would be a custom preset file, a preset.yml file or an addresses.yml.
 
-The main use case of this command is encrypting custom presets files. If your custom preset contains private keys, it's highly recommended to encrypt it and use provide --password when starting or configuring the node with Bootstrap.`;
+The main use case of this command is encrypting custom presets files. If your custom preset contains private keys, it's highly recommended to encrypt it and use provide --password when starting or configuring the node with gcr-node.`;
 
     static examples = [
         `
@@ -57,7 +57,7 @@ $ gcr-node start --password 1234 --preset testnet --assembly dual --customPreset
             required: true,
         }),
         password: CommandUtils.getPasswordFlag(
-            `The password to use to encrypt the source file into the destination file. Bootstrap prompts for a password by default, can be provided in the command line (--password=XXXX) or disabled in the command line (--noPassword).`,
+            `The password to use to encrypt the source file into the destination file. gcr-node prompts for a password by default, can be provided in the command line (--password=XXXX) or disabled in the command line (--noPassword).`,
         ),
     };
 

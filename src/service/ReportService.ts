@@ -167,7 +167,7 @@ export class ReportService {
     private async toRstReport(reportFolder: string, n: ReportNode) {
         const reportFile = join(reportFolder, `${n.name}-config.rst`);
         const reportContent =
-            `GCR Bootstrap Version: ${BootstrapUtils.VERSION}\n` +
+            `gcr-node Version: ${BootstrapUtils.VERSION}\n` +
             n.files
                 .map((fileReport) => {
                     const hasDescriptionSection = fileReport.sections.find((s) => s.lines.find((l) => l.description || l.type));

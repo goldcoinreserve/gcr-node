@@ -36,11 +36,11 @@ export class CommandUtils {
     });
 
     public static passwordFlag = CommandUtils.getPasswordFlag(
-        `A password used to encrypt and decrypt private keys in preset files like addresses.yml and preset.yml. Bootstrap prompts for a password by default, can be provided in the command line (--password=XXXX) or disabled in the command line (--noPassword).`,
+        `A password used to encrypt and decrypt private keys in preset files like addresses.yml and preset.yml. gcr-node prompts for a password by default, can be provided in the command line (--password=XXXX) or disabled in the command line (--noPassword).`,
     );
 
     public static noPasswordFlag = flags.boolean({
-        description: 'When provided, Bootstrap will not use a password, so private keys will be stored in plain text. Use with caution.',
+        description: 'When provided, gcr-node will not use a password, so private keys will be stored in plain text. Use with caution.',
         default: false,
     });
 
@@ -141,5 +141,13 @@ export class CommandUtils {
         }
         if (log) logger.info(`Password has been provided`);
         return providedPassword;
+    }
+
+    /**
+     * Returns account details formatted (ready to print)
+     */
+    public static formatAccount(account: PublicAccount, wrapped = true): string {
+        const log = `Address: ${account.address.plain()}`;
+        return wrapped ? `[${log}]` : log;
     }
 }

@@ -29,9 +29,9 @@ export default class UpdateVotingKeys extends Command {
 
 If the node's current voting file has an end epoch close to the current network epoch, this command will create a new 'private_key_treeX.dat' that continues the current file.
 
-By default, bootstrap creates a new voting file once the current file reaches its last month. The current network epoch is resolved from the network or you can provide it with the \`finalizationEpoch\` param.
+By default, gcr-node creates a new voting file once the current file reaches its last month. The current network epoch is resolved from the network or you can provide it with the \`finalizationEpoch\` param.
 
-When a new voting file is created, Bootstrap will advise running the \`link\` command again.
+When a new voting file is created, gcr-node will advise running the \`link\` command again.
 
 `;
 
@@ -46,7 +46,7 @@ When a new voting file is created, Bootstrap will advise running the \`link\` co
             default: BootstrapUtils.CURRENT_USER,
         }),
         finalizationEpoch: flags.integer({
-            description: `The network's finalization epoch. It can be retrieved from the /chain/info rest endpoint. If not provided, the bootstrap known epoch is used.`,
+            description: `The network's finalization epoch. It can be retrieved from the /chain/info rest endpoint. If not provided, the gcr-node known epoch is used.`,
         }),
     };
 
@@ -71,7 +71,8 @@ When a new voting file is created, Bootstrap will advise running the \`link\` co
         const addresses = configLoader.loadExistingAddresses(target, password);
         const privateKeySecurityMode = CryptoUtils.getPrivateKeySecurityMode(presetData.privateKeySecurityMode);
 
-        const finalizationEpoch = flags.finalizationEpoch || (await new RemoteNodeService().resolveCurrentFinalizationEpoch(presetData));
+        const finalizationEpoch =
+            flags.finalizationEpoch || (await new RemoteNodeService(presetData, false).resolveCurrentFinalizationEpoch());
 
         const votingKeyUpgrade = (
             await Promise.all(
