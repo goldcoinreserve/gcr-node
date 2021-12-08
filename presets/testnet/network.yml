@@ -18,7 +18,6 @@ maxSecretLockDuration: 30d
 maxNamespaceDuration: 3650d
 namespaceGracePeriodDuration: 30d
 blockGenerationTargetTime: 15s
-lastKnownNetworkEpoch: 235
 treasuryReissuanceEpoch: 1
 treasuryReissuanceEpochIneligibleVoterAddresses: []
 treasuryReissuanceTransactionSignatures: []
