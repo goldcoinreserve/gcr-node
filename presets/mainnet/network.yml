@@ -1,353 +1,282 @@
-initialCurrencyAtomicUnits: 3000000000000
-maxMosaicAtomicUnits: 120000000000000
-totalChainImportance: 3000000000000
-minHarvesterBalance: 1000000
-maxHarvesterBalance: 30000000000
-minVoterBalance: 5000000000
+initialCurrencyAtomicUnits: 3000000000000000
+maxMosaicAtomicUnits: 300000000000000000
+totalChainImportance: 3000000000000000
+minHarvesterBalance: 1000000000
+maxHarvesterBalance: 30000000000000
+minVoterBalance: 5000000000000
 networkType: 104
 minNamespaceDuration: 1m
 assemblies: 'api, dual, peer'
 harvestBeneficiaryPercentage: 15
 batchVerificationRandomSource: /dev/urandom
-currencyMosaicId: 686DA369E3F357C6
-harvestingMosaicId: 686DA369E3F357C6
+currencyMosaicId: 004C07E33772FDF2
+harvestingMosaicId: 004C07E33772FDF2
 baseNamespace: gcr
 votingSetGrouping: 1440
 maxSecretLockDuration: 30d
 maxNamespaceDuration: 3650d
 namespaceGracePeriodDuration: 30d
 blockGenerationTargetTime: 15s
-nemesisGenerationHashSeed: FC32A39EB545DE567343C02E9A2E46C603137AAD9C70FC7DB7A379F25B63D32C
-nemesisSignerPublicKey: 05EB28E29EFA33E671CC2C8A6473178F830D98D8A4CBB8A47BDD2847F6016FD7
+lastKnownNetworkEpoch: 235
+treasuryReissuanceEpoch: 1
+treasuryReissuanceEpochIneligibleVoterAddresses: []
+treasuryReissuanceTransactionSignatures: []
+nemesisGenerationHashSeed: F3F3B13355484976A3216D703D9CE17AF7CDE05913302766F0BBA7278D6CD166
+nemesisSignerPublicKey: 171B945E9ABE561756BF53B999099F129D37D68A138C30CC5A1FCD3E3D622466
 sinkAddress: NDJLSTXEVVYQG7WTVWG6DWRT5PGFZFPERVOGR2Q
-harvestNetworkFeeSinkAddress: NADUFPNOSLCURLORBP2ZM3G6WDPULX6NZVP4GRQ
-mosaicRentalFeeSinkAddress: NC4NYX7ERIJSSB2QLI4FODKMGBBEGU4LADCIQQQ
-namespaceRentalFeeSinkAddress: NDJLSTXEVVYQG7WTVWG6DWRT5PGFZFPERVOGR2Q
+harvestNetworkFeeSinkAddressV1: NDZFSRL4IACBPBKW5DXUSMXONQASPQDIBBQ6X3Q
+harvestNetworkFeeSinkAddress: NDZFSRL4IACBPBKW5DXUSMXONQASPQDIBBQ6X3Q
+mosaicRentalFeeSinkAddressV1: NBQBMWELF4C7EBIYKFSAFYCRHMV6XX22TOSSKYQ
+mosaicRentalFeeSinkAddress: NBQBMWELF4C7EBIYKFSAFYCRHMV6XX22TOSSKYQ
+namespaceRentalFeeSinkAddressV1: NAJ5QY6PLJMYSTI7J5E7T6V7JB3T7JCU22GZCPI
+namespaceRentalFeeSinkAddress: NAJ5QY6PLJMYSTI7J5E7T6V7JB3T7JCU22GZCPI
 faucetUrl: ''
-symbolServerToolsImage: symbolplatform/symbol-server:tools-gcc-1.0.0.0
-symbolServerImage: symbolplatform/symbol-server:gcc-1.0.0.0
-symbolRestImage: symbolplatform/symbol-rest:2.3.5
 minPartnerNodeVersion: 1.0.0.0
 maxPartnerNodeVersion: 1.0.255.255
-serverVersion: 1.0.0.0
-knownRestGateways:
-    - 'http://20.79.16.203:3000'
-    - 'http://20.79.16.206:3000'
-    - 'http://20.79.16.207:3000'
-
-trustedHosts:
+serverVersion: 1.0.3.1
+statisticsServiceUrl: 'http://stats-mainnet.gcr.superhow.net'
+knownRestGateways: []
+knownPeers: []
 inflation:
-    starting-at-height-1: 43000
-    starting-at-height-1048320: 43000
-    starting-at-height-2096640: 43600
-    starting-at-height-3144960: 44300
-    starting-at-height-4193280: 44900
-    starting-at-height-5241600: 45600
-    starting-at-height-6289920: 46300
-    starting-at-height-7338240: 47000
-    starting-at-height-8386560: 47700
-    starting-at-height-9434880: 48400
-    starting-at-height-10483200: 49100
-    starting-at-height-11531520: 49900
-    starting-at-height-12579840: 50600
-    starting-at-height-13628160: 51400
-    starting-at-height-14676480: 52200
-    starting-at-height-15724800: 52900
-    starting-at-height-16773120: 53700
-    starting-at-height-17821440: 54500
-    starting-at-height-18869760: 55400
-    starting-at-height-19918080: 56200
-    starting-at-height-20966400: 57000
-    starting-at-height-22014720: 57900
-    starting-at-height-23063040: 58800
-    starting-at-height-24111360: 59600
-    starting-at-height-25159680: 60500
-    starting-at-height-26208000: 61400
-    starting-at-height-27256320: 62400
-    starting-at-height-28304640: 63300
-    starting-at-height-29352960: 64200
-    starting-at-height-30401280: 65200
-    starting-at-height-31449600: 66200
-    starting-at-height-32497920: 67200
-    starting-at-height-33546240: 68200
-    starting-at-height-34594560: 69200
-    starting-at-height-35642880: 70200
-    starting-at-height-36691200: 71300
-    starting-at-height-37739520: 72400
-    starting-at-height-38787840: 73500
-    starting-at-height-39836160: 74600
-    starting-at-height-40884480: 75700
-    starting-at-height-41932800: 76800
-    starting-at-height-42981120: 78000
-    starting-at-height-44029440: 79100
-    starting-at-height-45077760: 80300
-    starting-at-height-46126080: 81500
-    starting-at-height-47174400: 82700
-    starting-at-height-48222720: 84000
-    starting-at-height-49271040: 85200
-    starting-at-height-50319360: 86500
-    starting-at-height-51367680: 87800
-    starting-at-height-52416000: 89100
-    starting-at-height-53464320: 90500
-    starting-at-height-54512640: 91800
-    starting-at-height-55560960: 93200
-    starting-at-height-56609280: 94600
-    starting-at-height-57657600: 96000
-    starting-at-height-58705920: 97500
-    starting-at-height-59754240: 98900
-    starting-at-height-60802560: 100400
-    starting-at-height-61850880: 101900
-    starting-at-height-62899200: 103400
-    starting-at-height-63947520: 105000
-    starting-at-height-64995840: 106600
-    starting-at-height-66044160: 108200
-    starting-at-height-67092480: 109800
-    starting-at-height-68140800: 111400
-    starting-at-height-69189120: 113100
-    starting-at-height-70237440: 114800
-    starting-at-height-71285760: 116500
-    starting-at-height-72334080: 118300
-    starting-at-height-73382400: 120100
-    starting-at-height-74430720: 121900
-    starting-at-height-75479040: 123700
-    starting-at-height-76527360: 125500
-    starting-at-height-77575680: 127400
-    starting-at-height-78624000: 129300
-    starting-at-height-79672320: 131300
-    starting-at-height-80720640: 133200
-    starting-at-height-81768960: 135200
-    starting-at-height-82817280: 137300
-    starting-at-height-83865600: 139300
-    starting-at-height-84913920: 141400
-    starting-at-height-85962240: 143500
-    starting-at-height-87010560: 145700
-    starting-at-height-88058880: 147900
-    starting-at-height-89107200: 150100
-    starting-at-height-90155520: 152300
-    starting-at-height-91203840: 154600
-    starting-at-height-92252160: 156900
-    starting-at-height-93300480: 159300
-    starting-at-height-94348800: 161700
-    starting-at-height-95397120: 164100
-    starting-at-height-96445440: 166600
-    starting-at-height-97493760: 169100
-    starting-at-height-98542080: 171600
-    starting-at-height-99590400: 174200
-    starting-at-height-100638720: 176800
-    starting-at-height-101687040: 179500
-    starting-at-height-102735360: 182100
-    starting-at-height-103783680: 184900
-    starting-at-height-104832000: 187700
-    starting-at-height-105880320: 190500
-    starting-at-height-106928640: 193300
-    starting-at-height-107976960: 196200
-    starting-at-height-109025280: 199200
-    starting-at-height-110073600: 202200
-    starting-at-height-111121920: 205200
-    starting-at-height-112170240: 208300
-    starting-at-height-113218560: 211400
-    starting-at-height-114266880: 214600
-    starting-at-height-115315200: 217800
-    starting-at-height-116363520: 221000
-    starting-at-height-117411840: 224400
-    starting-at-height-118460160: 227700
-    starting-at-height-119508480: 231100
-    starting-at-height-120556800: 234600
-    starting-at-height-121605120: 238100
-    starting-at-height-122653440: 241700
-    starting-at-height-123701760: 245300
-    starting-at-height-124750080: 249000
-    starting-at-height-125798400: 252700
-    starting-at-height-126846720: 256500
-    starting-at-height-127895040: 260400
-    starting-at-height-128943360: 264300
-    starting-at-height-129991680: 268200
-    starting-at-height-131040000: 272300
-    starting-at-height-132088320: 276400
-    starting-at-height-133136640: 280500
-    starting-at-height-134184960: 284700
-    starting-at-height-135233280: 289000
-    starting-at-height-136281600: 293300
-    starting-at-height-137329920: 297700
-    starting-at-height-138378240: 302200
-    starting-at-height-139426560: 306700
-    starting-at-height-140474880: 311300
-    starting-at-height-141523200: 316000
-    starting-at-height-142571520: 320700
-    starting-at-height-143619840: 325500
-    starting-at-height-144668160: 330400
-    starting-at-height-145716480: 335400
-    starting-at-height-146764800: 340400
-    starting-at-height-147813120: 345500
-    starting-at-height-148861440: 350700
-    starting-at-height-149909760: 356000
-    starting-at-height-150958080: 361300
-    starting-at-height-152006400: 366700
-    starting-at-height-153054720: 372200
-    starting-at-height-154103040: 377800
-    starting-at-height-155151360: 383500
-    starting-at-height-156199680: 389200
-    starting-at-height-157248000: 395100
-    starting-at-height-158296320: 401000
-    starting-at-height-159344640: 407000
-    starting-at-height-160392960: 413100
-    starting-at-height-161441280: 419300
-    starting-at-height-162489600: 425600
-    starting-at-height-163537920: 432000
-    starting-at-height-164586240: 438400
-    starting-at-height-165634560: 445000
-    starting-at-height-166682880: 451700
-    starting-at-height-167731200: 458500
-    starting-at-height-168779520: 465400
-    starting-at-height-169827840: 472300
-    starting-at-height-170876160: 479400
-    starting-at-height-171924480: 486600
-    starting-at-height-172972800: 493900
-    starting-at-height-174021120: 501300
-    starting-at-height-175069440: 508800
-    starting-at-height-176117760: 516500
-    starting-at-height-177166080: 524200
-    starting-at-height-178214400: 532100
-    starting-at-height-179262720: 540100
-    starting-at-height-180311040: 548200
-    starting-at-height-181359360: 556400
-    starting-at-height-182407680: 564700
-    starting-at-height-183456000: 573200
-    starting-at-height-184504320: 581800
-    starting-at-height-185552640: 590500
-    starting-at-height-186600960: 599400
-    starting-at-height-187649280: 608400
-    starting-at-height-188697600: 617500
-    starting-at-height-189745920: 626800
-    starting-at-height-190794240: 636200
-    starting-at-height-191842560: 645700
-    starting-at-height-192890880: 655400
-    starting-at-height-193939200: 665200
-    starting-at-height-194987520: 675200
-    starting-at-height-196035840: 685300
-    starting-at-height-197084160: 695600
-    starting-at-height-198132480: 706000
-    starting-at-height-199180800: 716600
-    starting-at-height-200229120: 727400
-    starting-at-height-201277440: 738300
-    starting-at-height-202325760: 749400
-    starting-at-height-203374080: 760600
-    starting-at-height-204422400: 772000
-    starting-at-height-205470720: 783600
-    starting-at-height-206519040: 795400
-    starting-at-height-207567360: 807300
-    starting-at-height-208615680: 819400
-    starting-at-height-209664000: 831700
-    starting-at-height-210712320: 844200
-    starting-at-height-211760640: 856800
-    starting-at-height-212808960: 869700
-    starting-at-height-213857280: 882700
-    starting-at-height-214905600: 896000
-    starting-at-height-215953920: 909400
-    starting-at-height-217002240: 923000
-    starting-at-height-218050560: 936900
-    starting-at-height-219098880: 950900
-    starting-at-height-220147200: 965200
-    starting-at-height-221195520: 979700
-    starting-at-height-222243840: 994400
-    starting-at-height-223292160: 1009300
-    starting-at-height-224340480: 1024400
-    starting-at-height-225388800: 1039800
-    starting-at-height-226437120: 1055400
-    starting-at-height-227485440: 1071200
-    starting-at-height-228533760: 1087300
-    starting-at-height-229582080: 1103600
-    starting-at-height-230630400: 1120200
-    starting-at-height-231678720: 1137000
-    starting-at-height-232727040: 1154000
-    starting-at-height-233775360: 1171300
-    starting-at-height-234823680: 1188900
-    starting-at-height-235872000: 1206700
-    starting-at-height-236920320: 1224800
-    starting-at-height-237968640: 1243200
-    starting-at-height-239016960: 1261800
-    starting-at-height-240065280: 1280800
-    starting-at-height-241113600: 1300000
-    starting-at-height-242161920: 1319500
-    starting-at-height-243210240: 1339300
-    starting-at-height-244258560: 1359400
-    starting-at-height-245306880: 1379800
-    starting-at-height-246355200: 1400500
-    starting-at-height-247403520: 1421500
-    starting-at-height-248451840: 1442800
-    starting-at-height-249500160: 1464400
-    starting-at-height-250548480: 1486400
-    starting-at-height-251596800: 0
-knownPeers:
-    api-node:
-        - publicKey: 3faaed4350bc31b938f3caf6d20252a7f4c27cbebd16d4a40974494f42375aa9
-          endpoint:
-              host: 20.79.16.203
-              port: 7900
-          metadata:
-              name: gcr-dual1
-              roles: Api,Peer,Voting
-        - publicKey: 4e79bab20a67226783261df3f74e5df4a1d1df4fa53de4342dd041c211ba435e
-          endpoint:
-              host: 20.79.16.206
-              port: 7900
-          metadata:
-              name: gcr-dual2
-              roles: Api,Peer,Voting
-        - publicKey: 5af376e4e82aa2ba739fec9b43b110290112c3f59f8dcc9c3ced3219b4eb7406
-          endpoint:
-              host: 20.79.16.207
-              port: 7900
-          metadata:
-              name: gcr-dual3
-              roles: Api,Peer,Voting
-    peer-node:
-        - publicKey: 266f4b59d1d8194adb0e4102679e595e49ce2787c9e6b9ced029f0453fc91926
-          endpoint:
-              host: 20.52.56.39
-              port: 7900
-          metadata:
-              name: gcr-peer1
-              roles: Peer,Voting
-        - publicKey: 0941b357941b3e0abce5d22af3eeb5f5d5b7b43867d2fa090d7a6f99bfead848
-          endpoint:
-              host: 20.52.56.36
-              port: 7900
-          metadata:
-              name: gcr-peer2
-              roles: Peer,Voting
-        - publicKey: bac77149816350a1a4777d2140323e941c7244e79879a2dd9e3a1fb0c970f323
-          endpoint:
-              host: 20.52.49.24
-              port: 7900
-          metadata:
-              name: gcr-peer3
-              roles: Peer,Voting
-        - publicKey: 5859f7a3b976160d575483238399c67d4ece1238ecb8997d86b7bf0ee80822fa
-          endpoint:
-              host: 20.52.55.111
-              port: 7900
-          metadata:
-              name: gcr-peer4
-              roles: Peer,Voting
-        - publicKey: 3faaed4350bc31b938f3caf6d20252a7f4c27cbebd16d4a40974494f42375aa9
-          endpoint:
-              host: 20.79.16.203
-              port: 7900
-          metadata:
-              name: gcr-dual1
-              roles: Api,Peer,Voting
-        - publicKey: 4e79bab20a67226783261df3f74e5df4a1d1df4fa53de4342dd041c211ba435e
-          endpoint:
-              host: 20.79.16.206
-              port: 7900
-          metadata:
-              name: gcr-dual2
-              roles: Api,Peer,Voting
-        - publicKey: 5af376e4e82aa2ba739fec9b43b110290112c3f59f8dcc9c3ced3219b4eb7406
-          endpoint:
-              host: 20.79.16.207
-              port: 7900
-          metadata:
-              name: gcr-dual3
-              roles: Api,Peer,Voting
+    starting-at-height-1: 43000000
+    starting-at-height-1048320: 43000000
+    starting-at-height-2096640: 43600000
+    starting-at-height-3144960: 44300000
+    starting-at-height-4193280: 44900000
+    starting-at-height-5241600: 45600000
+    starting-at-height-6289920: 46300000
+    starting-at-height-7338240: 47000000
+    starting-at-height-8386560: 47700000
+    starting-at-height-9434880: 48400000
+    starting-at-height-10483200: 49100000
+    starting-at-height-11531520: 49900000
+    starting-at-height-12579840: 50600000
+    starting-at-height-13628160: 51400000
+    starting-at-height-14676480: 52200000
+    starting-at-height-15724800: 52900000
+    starting-at-height-16773120: 53700000
+    starting-at-height-17821440: 54500000
+    starting-at-height-18869760: 55400000
+    starting-at-height-19918080: 56200000
+    starting-at-height-20966400: 57000000
+    starting-at-height-22014720: 57900000
+    starting-at-height-23063040: 58800000
+    starting-at-height-24111360: 59600000
+    starting-at-height-25159680: 60500000
+    starting-at-height-26208000: 61400000
+    starting-at-height-27256320: 62400000
+    starting-at-height-28304640: 63300000
+    starting-at-height-29352960: 64200000
+    starting-at-height-30401280: 65200000
+    starting-at-height-31449600: 66200000
+    starting-at-height-32497920: 67200000
+    starting-at-height-33546240: 68200000
+    starting-at-height-34594560: 69200000
+    starting-at-height-35642880: 70200000
+    starting-at-height-36691200: 71300000
+    starting-at-height-37739520: 72400000
+    starting-at-height-38787840: 73500000
+    starting-at-height-39836160: 74600000
+    starting-at-height-40884480: 75700000
+    starting-at-height-41932800: 76800000
+    starting-at-height-42981120: 78000000
+    starting-at-height-44029440: 79100000
+    starting-at-height-45077760: 80300000
+    starting-at-height-46126080: 81500000
+    starting-at-height-47174400: 82700000
+    starting-at-height-48222720: 84000000
+    starting-at-height-49271040: 85200000
+    starting-at-height-50319360: 86500000
+    starting-at-height-51367680: 87800000
+    starting-at-height-52416000: 89100000
+    starting-at-height-53464320: 90500000
+    starting-at-height-54512640: 91800000
+    starting-at-height-55560960: 93200000
+    starting-at-height-56609280: 94600000
+    starting-at-height-57657600: 96000000
+    starting-at-height-58705920: 97500000
+    starting-at-height-59754240: 98900000
+    starting-at-height-60802560: 100400000
+    starting-at-height-61850880: 101900000
+    starting-at-height-62899200: 103400000
+    starting-at-height-63947520: 105000000
+    starting-at-height-64995840: 106600000
+    starting-at-height-66044160: 108200000
+    starting-at-height-67092480: 109800000
+    starting-at-height-68140800: 111400000
+    starting-at-height-69189120: 113100000
+    starting-at-height-70237440: 114800000
+    starting-at-height-71285760: 116500000
+    starting-at-height-72334080: 118300000
+    starting-at-height-73382400: 120100000
+    starting-at-height-74430720: 121900000
+    starting-at-height-75479040: 123700000
+    starting-at-height-76527360: 125500000
+    starting-at-height-77575680: 127400000
+    starting-at-height-78624000: 129300000
+    starting-at-height-79672320: 131300000
+    starting-at-height-80720640: 133200000
+    starting-at-height-81768960: 135200000
+    starting-at-height-82817280: 137300000
+    starting-at-height-83865600: 139300000
+    starting-at-height-84913920: 141400000
+    starting-at-height-85962240: 143500000
+    starting-at-height-87010560: 145700000
+    starting-at-height-88058880: 147900000
+    starting-at-height-89107200: 150100000
+    starting-at-height-90155520: 152300000
+    starting-at-height-91203840: 154600000
+    starting-at-height-92252160: 156900000
+    starting-at-height-93300480: 159300000
+    starting-at-height-94348800: 161700000
+    starting-at-height-95397120: 164100000
+    starting-at-height-96445440: 166600000
+    starting-at-height-97493760: 169100000
+    starting-at-height-98542080: 171600000
+    starting-at-height-99590400: 174200000
+    starting-at-height-100638720: 176800000
+    starting-at-height-101687040: 179500000
+    starting-at-height-102735360: 182100000
+    starting-at-height-103783680: 184900000
+    starting-at-height-104832000: 187700000
+    starting-at-height-105880320: 190500000
+    starting-at-height-106928640: 193300000
+    starting-at-height-107976960: 196200000
+    starting-at-height-109025280: 199200000
+    starting-at-height-110073600: 202200000
+    starting-at-height-111121920: 205200000
+    starting-at-height-112170240: 208300000
+    starting-at-height-113218560: 211400000
+    starting-at-height-114266880: 214600000
+    starting-at-height-115315200: 217800000
+    starting-at-height-116363520: 221000000
+    starting-at-height-117411840: 224400000
+    starting-at-height-118460160: 227700000
+    starting-at-height-119508480: 231100000
+    starting-at-height-120556800: 234600000
+    starting-at-height-121605120: 238100000
+    starting-at-height-122653440: 241700000
+    starting-at-height-123701760: 245300000
+    starting-at-height-124750080: 249000000
+    starting-at-height-125798400: 252700000
+    starting-at-height-126846720: 256500000
+    starting-at-height-127895040: 260400000
+    starting-at-height-128943360: 264300000
+    starting-at-height-129991680: 268200000
+    starting-at-height-131040000: 272300000
+    starting-at-height-132088320: 276400000
+    starting-at-height-133136640: 280500000
+    starting-at-height-134184960: 284700000
+    starting-at-height-135233280: 289000000
+    starting-at-height-136281600: 293300000
+    starting-at-height-137329920: 297700000
+    starting-at-height-138378240: 302200000
+    starting-at-height-139426560: 306700000
+    starting-at-height-140474880: 311300000
+    starting-at-height-141523200: 316000000
+    starting-at-height-142571520: 320700000
+    starting-at-height-143619840: 325500000
+    starting-at-height-144668160: 330400000
+    starting-at-height-145716480: 335400000
+    starting-at-height-146764800: 340400000
+    starting-at-height-147813120: 345500000
+    starting-at-height-148861440: 350700000
+    starting-at-height-149909760: 356000000
+    starting-at-height-150958080: 361300000
+    starting-at-height-152006400: 366700000
+    starting-at-height-153054720: 372200000
+    starting-at-height-154103040: 377800000
+    starting-at-height-155151360: 383500000
+    starting-at-height-156199680: 389200000
+    starting-at-height-157248000: 395100000
+    starting-at-height-158296320: 401000000
+    starting-at-height-159344640: 407000000
+    starting-at-height-160392960: 413100000
+    starting-at-height-161441280: 419300000
+    starting-at-height-162489600: 425600000
+    starting-at-height-163537920: 432000000
+    starting-at-height-164586240: 438400000
+    starting-at-height-165634560: 445000000
+    starting-at-height-166682880: 451700000
+    starting-at-height-167731200: 458500000
+    starting-at-height-168779520: 465400000
+    starting-at-height-169827840: 472300000
+    starting-at-height-170876160: 479400000
+    starting-at-height-171924480: 486600000
+    starting-at-height-172972800: 493900000
+    starting-at-height-174021120: 501300000
+    starting-at-height-175069440: 508800000
+    starting-at-height-176117760: 516500000
+    starting-at-height-177166080: 524200000
+    starting-at-height-178214400: 532100000
+    starting-at-height-179262720: 540100000
+    starting-at-height-180311040: 548200000
+    starting-at-height-181359360: 556400000
+    starting-at-height-182407680: 564700000
+    starting-at-height-183456000: 573200000
+    starting-at-height-184504320: 581800000
+    starting-at-height-185552640: 590500000
+    starting-at-height-186600960: 599400000
+    starting-at-height-187649280: 608400000
+    starting-at-height-188697600: 617500000
+    starting-at-height-189745920: 626800000
+    starting-at-height-190794240: 636200000
+    starting-at-height-191842560: 645700000
+    starting-at-height-192890880: 655400000
+    starting-at-height-193939200: 665200000
+    starting-at-height-194987520: 675200000
+    starting-at-height-196035840: 685300000
+    starting-at-height-197084160: 695600000
+    starting-at-height-198132480: 706000000
+    starting-at-height-199180800: 716600000
+    starting-at-height-200229120: 727400000
+    starting-at-height-201277440: 738300000
+    starting-at-height-202325760: 749400000
+    starting-at-height-203374080: 760600000
+    starting-at-height-204422400: 772000000
+    starting-at-height-205470720: 783600000
+    starting-at-height-206519040: 795400000
+    starting-at-height-207567360: 807300000
+    starting-at-height-208615680: 819400000
+    starting-at-height-209664000: 831700000
+    starting-at-height-210712320: 844200000
+    starting-at-height-211760640: 856800000
+    starting-at-height-212808960: 869700000
+    starting-at-height-213857280: 882700000
+    starting-at-height-214905600: 896000000
+    starting-at-height-215953920: 909400000
+    starting-at-height-217002240: 923000000
+    starting-at-height-218050560: 936900000
+    starting-at-height-219098880: 950900000
+    starting-at-height-220147200: 965200000
+    starting-at-height-221195520: 979700000
+    starting-at-height-222243840: 994400000
+    starting-at-height-223292160: 1009300000
+    starting-at-height-224340480: 1024400000
+    starting-at-height-225388800: 1039800000
+    starting-at-height-226437120: 1055400000
+    starting-at-height-227485440: 1071200000
+    starting-at-height-228533760: 1087300000
+    starting-at-height-229582080: 1103600000
+    starting-at-height-230630400: 1120200000
+    starting-at-height-231678720: 1137000000
+    starting-at-height-232727040: 1154000000
+    starting-at-height-233775360: 1171300000
+    starting-at-height-234823680: 1188900000
+    starting-at-height-235872000: 1206700000
+    starting-at-height-236920320: 1224800000
+    starting-at-height-237968640: 1243200000
+    starting-at-height-239016960: 1261800000
+    starting-at-height-240065280: 1280800000
+    starting-at-height-241113600: 1300000000
+    starting-at-height-242161920: 1319500000
+    starting-at-height-243210240: 1339300000
+    starting-at-height-244258560: 1359400000
+    starting-at-height-245306880: 1379800000
+    starting-at-height-246355200: 1400500000
+    starting-at-height-247403520: 1421500000
+    starting-at-height-248451840: 1442800000
+    starting-at-height-249500160: 1464400000
+    starting-at-height-250548480: 1486400000
+    starting-at-height-251596800: 1508700000
+    starting-at-height-362880000: 0

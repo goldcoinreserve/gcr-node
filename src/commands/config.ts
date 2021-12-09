@@ -58,7 +58,7 @@ export default class Config extends Command {
         }),
 
         upgrade: flags.boolean({
-            description: `It regenerates the configuration reusing the previous keys. Use this flag when upgrading the version of bootstrap to keep your node up to date without dropping the local data. The original preset (-t), assembly (-a), and custom preset (-a) must be used. Backup the target folder before upgrading.`,
+            description: `It regenerates the configuration reusing the previous keys. Use this flag when upgrading the version of gcr-nodes to keep your node up to date without dropping the local data. The original preset (-t), assembly (-a), and custom preset (-a) must be used. Backup the target folder before upgrading.`,
             default: ConfigService.defaultParams.reset,
         }),
 

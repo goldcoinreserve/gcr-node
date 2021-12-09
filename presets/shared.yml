@@ -4,12 +4,14 @@ nodePort: 7900
 enableCacheDatabaseStorage: true
 enableVerifiableState: true
 enableVerifiableReceipts: true
-initialCurrencyAtomicUnits: 3000000000000
-maxMosaicAtomicUnits: 120000000000000
-totalChainImportance: 3000000000000
-minHarvesterBalance: 1000000
-maxHarvesterBalance: 30000000000
-minVoterBalance: 5000000000
+initialCurrencyAtomicUnits: 3000000000000000
+maxMosaicAtomicUnits: 300000000000000000
+totalChainImportance: 3000000000000000
+minHarvesterBalance: 1000000000
+maxHarvesterBalance: 30000000000000
+minVoterBalance: 5000000000000
+currencyName: currency
+harvestingName: currency
 blockGenerationTargetTime: 15s
 blockTimeSmoothingFactor: 3000
 importanceGrouping: 720
@@ -23,15 +25,17 @@ namespaceGracePeriodDuration: 30d
 maxAccountRestrictionValues: 512
 maxMosaicRestrictionValues: 20
 maxMessageSize: 4096
-reservedRootNamespaceNames: 'gcr'
-defaultDynamicFeeMultiplier: 1000000
+reservedRootNamespaceNames: 'gcr, goldcoinreserve, user, account, org, com, biz, net, edu, mil, gov, inf'
+defaultDynamicFeeMultiplier: 100
 minFeeMultiplier: 10
 maxTimeBehindPullTransactionsStart: 5m
-epochAdjustment: 1620136098s 
+epochAdjustment: 1638265052s 
 nodeEqualityStrategy: host
-maxVotingKeyLifetime: 360
+votingKeyDesiredLifetime: 360
+votingKeyDesiredFutureLifetime: 60
+maxVotingKeyLifetime: 26280
 minVotingKeyLifetime: 112
-mosaicRentalFee: 40
+mosaicRentalFee: 55000
 votingSetGrouping: 1440
 maxVotingKeysPerAccount: 3
 autoUpdateVotingKeys: true
@@ -40,7 +44,7 @@ maxCosignaturesPerAggregate: 100
 harvestBeneficiaryPercentage: 15
 harvestNetworkPercentage: 10
 rootNamespaceRentalFeePerBlock: 1
-childNamespaceRentalFee: 100
+childNamespaceRentalFee: 55000
 enableStrictCosignatureCheck: false
 enableBondedAggregateSupport: true
 maxBondedTransactionLifetime: 48h
@@ -52,12 +56,12 @@ localNetworks: 127.0.0.1
 lockedFundsPerAggregate: 10000000
 maxHashLockDuration: 2d
 maxSecretLockDuration: 30d
-minProofSize: 20
-maxProofSize: 4096
+minProofSize: 1
+maxProofSize: 1024
 maxValueSize: 1024
 maxMosaicsPerAccount: 100000
 maxMosaicDuration: 36500d
-maxMosaicDivisibility: 6
+maxMosaicDivisibility: 9
 maxMultisigDepth: 4
 maxCosignatoriesPerAccount: 1000
 maxCosignedAccountsPerAccount: 1000
@@ -65,13 +69,13 @@ maxNameSize: 128
 maxChildNamespaces: 500
 maxNamespaceDepth: 3
 batchVerificationRandomSource:
-symbolServerImage: symbolplatform/symbol-server:gcc-10-1.0.2.0
-symbolRestImage: symbolplatform/symbol-rest:2.3.6
-symbolExplorerImage: symbolplatform/symbol-explorer:0.6.3-alpha
+symbolServerImage: symbolplatform/symbol-server:gcc-10-1.0.3.1
+symbolRestImage: symbolplatform/symbol-rest:2.4.0
+symbolExplorerImage: symbolplatform/symbol-explorer:1.1.0-alpha
 symbolWalletImage: symbolplatform/symbol-desktop-wallet:1.0.1
-symbolFaucetImage: symbolplatform/symbol-faucet:0.5.0-alpha
-symbolAgentImage: symbolplatform/symbol-node-rewards-agent:2.0.0
+symbolFaucetImage: symbolplatform/symbol-faucet:1.0.1-alpha
 mongoImage: mongo:4.4.3-bionic
+httpsPortalImage: steveltn/https-portal:1.19
 mongoComposeRunParam: --wiredTigerCacheSizeGB 2
 logLevel: 'Info'
 # brokerLogLevel: 'Info'
@@ -87,7 +91,8 @@ enableDelegatedHarvestersAutoDetection: true
 catapultAppFolder: /usr/catapult
 rewardProgramAgentPort: 7881
 enableRevoteOnBoot: true
-totalVotingBalanceCalculationFix: 0
+totalVotingBalanceCalculationFix: 1
+treasuryReissuance: 1
 
 # config database
 databaseName: catapult
@@ -214,5 +219,14 @@ maxConnectionAttempts: 15
 baseRetryDelay: 750
 connectionPoolSize: 10
 maxSubscriptions: 300
-restExtensions: 'accountLink, aggregate, lockHash, lockSecret, mosaic, metadata, multisig, namespace, receipts, restrictions, transfer, cmc'
+restExtensions: 'accountLink, aggregate, lockHash, lockSecret, mosaic, metadata, multisig, namespace, receipts, restrictions, transfer'
 restDeploymentTool: gcr-node
+restUncirculatingAccountPublicKeys: ''
+restProtocol: HTTP
+restSSLPath: '/symbol-workdir'
+restSSLKeyFileName: 'restSSL.key'
+restSSLCertificateFileName: 'restSSL.crt'
+statisticsServicePeerFilter: ''
+statisticsServicePeerLimit: 50
+statisticsServiceRestFilter: suggested
+statisticsServiceRestLimit: 10

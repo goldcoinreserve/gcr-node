@@ -19,8 +19,8 @@ import { BootstrapUtils } from './BootstrapUtils';
 import { ComposeParams, ComposeService } from './ComposeService';
 import { ConfigParams, ConfigResult, ConfigService } from './ConfigService';
 import { LinkParams, LinkService } from './LinkService';
+import { ModifyMultisigParams, ModifyMultisigService } from './ModifyMultisigService';
 import { ReportParams, ReportService } from './ReportService';
-import { RewardProgramParams, RewardProgramService } from './RewardProgramService';
 import { RunParams, RunService } from './RunService';
 
 export type StartParams = ConfigParams & ComposeParams & RunParams;
@@ -36,8 +36,17 @@ export class BootstrapService {
      *
      * @param config the params of the config command.
      */
-    public async config(config: ConfigParams = ConfigService.defaultParams): Promise<ConfigResult> {
+    public async config(config: ConfigParams): Promise<ConfigResult> {
         return new ConfigService(this.root, config).run();
+    }
+
+    /**
+     * It resolves the preset used for preventive configuration.
+     *
+     * @param config the params of the config command.
+     */
+    public resolveConfigPreset(config: ConfigParams): ConfigPreset {
+        return new ConfigService(this.root, config).resolveConfigPreset(false);
     }
 
     /**
@@ -49,11 +58,7 @@ export class BootstrapService {
      * @param passedPresetData the created preset if you know it, otherwise will load the latest one resolved from the target folder.
      * @param passedAddresses the created addresses if you know if, otherwise will load the latest one resolved form the target folder.
      */
-    public compose(
-        config: ComposeParams = ComposeService.defaultParams,
-        passedPresetData?: ConfigPreset,
-        passedAddresses?: Addresses,
-    ): Promise<DockerCompose> {
+    public compose(config: ComposeParams, passedPresetData?: ConfigPreset, passedAddresses?: Addresses): Promise<DockerCompose> {
         return new ComposeService(this.root, config).run(passedPresetData, passedAddresses);
     }
 
@@ -68,7 +73,7 @@ export class BootstrapService {
      */
 
     public async link(
-        config: LinkParams = LinkService.defaultParams,
+        config: LinkParams,
         passedPresetData?: ConfigPreset | undefined,
         passedAddresses?: Addresses | undefined,
     ): Promise<void> {
@@ -76,18 +81,19 @@ export class BootstrapService {
     }
 
     /**
-     * It calls a running service announcing the registration of the nodes to the supernode rewards program.
+     * It converts main account into multisig account or modifies multisig structure
      *
      * @param config the params passed
      * @param passedPresetData  the created preset if you know it, otherwise will load the latest one resolved from the target folder.
      * @param passedAddresses  the created addresses if you know it, otherwise will load the latest one resolved from the target folder.
      */
-    public async enrollRewardProgram(
-        config: RewardProgramParams = RewardProgramService.defaultParams,
+
+    public async modifyMultisig(
+        config: ModifyMultisigParams,
         passedPresetData?: ConfigPreset | undefined,
         passedAddresses?: Addresses | undefined,
     ): Promise<void> {
-        await new RewardProgramService(config).enroll(passedPresetData, passedAddresses);
+        await new ModifyMultisigService(config).run(passedPresetData, passedAddresses);
     }
 
     /**
@@ -99,8 +105,8 @@ export class BootstrapService {
      * @param passedPresetData the created preset if you know if, otherwise will load the latest one resolved from the target folder.
      * @return the paths of the created reports.
      */
-    public async report(config: ReportParams = ReportService.defaultParams, passedPresetData?: ConfigPreset): Promise<string[]> {
-        return await new ReportService(this.root, config).run(passedPresetData);
+    public async report(config: ReportParams, passedPresetData?: ConfigPreset): Promise<string[]> {
+        return new ReportService(this.root, config).run(passedPresetData);
     }
 
     /**
@@ -112,7 +118,7 @@ export class BootstrapService {
      *
      * @param config the params of the run command.
      */
-    public async run(config: RunParams = RunService.defaultParams): Promise<void> {
+    public async run(config: RunParams): Promise<void> {
         await new RunService(config).run();
     }
 
@@ -121,7 +127,7 @@ export class BootstrapService {
      *
      * @param config the params of the clean command.
      */
-    public async resetData(config = { target: RunService.defaultParams.target }): Promise<void> {
+    public async resetData(config: { target: string }): Promise<void> {
         await new RunService(config).resetData();
     }
 
@@ -130,7 +136,7 @@ export class BootstrapService {
      *
      * @param config the params of the clean command.
      */
-    public async healthCheck(config = { target: RunService.defaultParams.target }): Promise<void> {
+    public async healthCheck(config: { target: string }): Promise<void> {
         await new RunService(config).healthCheck();
     }
 
@@ -153,7 +159,7 @@ export class BootstrapService {
      *
      * @param config the params necessary to detect and stop the network.
      */
-    public async stop(config: RunParams = RunService.defaultParams): Promise<void> {
+    public async stop(config: RunParams): Promise<void> {
         await new RunService(config).stop();
     }
 }

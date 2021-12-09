@@ -134,7 +134,7 @@ export class VerifyService {
             return {
                 header,
                 message: `Your are running with the sudo user!`,
-                recommendation: `Either don't use sudo or create a non sudo user to run Bootstrap.`,
+                recommendation: `Either don't use sudo or create a non sudo user to run gcr-node.`,
             };
         }
         return { header, message: `Your are not the sudo user!` };
