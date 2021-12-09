@@ -25,7 +25,7 @@ namespaceGracePeriodDuration: 30d
 maxAccountRestrictionValues: 512
 maxMosaicRestrictionValues: 20
 maxMessageSize: 4096
-reservedRootNamespaceNames: 'gcr, goldcoinreserve, us…net, edu, mil, gov, inf'
+reservedRootNamespaceNames: 'gcr, goldcoinreserve, user, account, org, com, biz, net, edu, mil, gov, inf'
 defaultDynamicFeeMultiplier: 100
 minFeeMultiplier: 10
 maxTimeBehindPullTransactionsStart: 5m
@@ -35,7 +35,7 @@ votingKeyDesiredLifetime: 360
 votingKeyDesiredFutureLifetime: 60
 maxVotingKeyLifetime: 26280
 minVotingKeyLifetime: 112
-mosaicRentalFee: 500
+mosaicRentalFee: 55000
 votingSetGrouping: 1440
 maxVotingKeysPerAccount: 3
 autoUpdateVotingKeys: true

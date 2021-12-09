@@ -7,7 +7,7 @@ minVoterBalance: 5000000000000
 networkType: 104
 minNamespaceDuration: 1m
 assemblies: 'api, dual, peer'
-harvestBeneficiaryPercentage: 10
+harvestBeneficiaryPercentage: 15
 batchVerificationRandomSource: /dev/urandom
 currencyMosaicId: 004C07E33772FDF2
 harvestingMosaicId: 004C07E33772FDF2
