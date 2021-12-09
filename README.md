@@ -81,7 +81,7 @@ cd
 
 # Requirements
 
--   Node 10+
+-   Node 14
 -   Docker
 -   Docker Compose 1.29+ (better to use https://docs.docker.com/engine/install/ubuntu/)
 
@@ -94,11 +94,11 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 ```
 
 To use NVM, you may need to logout and login to your session
-Install Node 12:
+Install Node 14:
 
 ```
-nvm install 12
-nvm use 12
+nvm install 14
+nvm use 14
 ```
 
 Get the latest version of docker and docker compose:
@@ -202,18 +202,18 @@ gcr-node creates peer nodes with remote harvesting enabled by default, but they 
 
 This can be done by gcr-node too, but it needs to be a step separated from gcr-node start because funds are required to announce transactions.
 
-You can find the main address to fund in the file located at node/target/addresses.yml
+1. **Send tokens to your main account** (You can find the main address to fund in the file located at node/target/addresses.yml)
 
-To decrypt your private keys, you can use this command:
+If you want to export private keys first you have to decrypt by using following command:
 
 ```
 gcr-node decrypt --source target/addresses.yml --destination plain-addresses.yml
 ```
 
-The decrypted file with your provate keys will be located at node/plain-addresses.yml
+The decrypted file with your private keys will be located at node/plain-addresses.yml
 
 
-Once the node is running with gcr-node start and you have funded its account, from a different terminal (but from the same folder), simply type:
+2. **Link your account.** Once the node is running with gcr-node start and you have funded its account, from a different terminal (but from the same folder), simply type:
 
 ```
 gcr-node link
@@ -223,7 +223,7 @@ In case the node can't find any node to transmit transaction, you may set an ext
 
 
 ```
-gcr-node link --url=http://20.79.16.203:3000
+gcr-node link --url=http://mainnet-dual-1.gcr.superhow.net:3000
 ```
 
 
