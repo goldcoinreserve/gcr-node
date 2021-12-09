@@ -5,7 +5,6 @@ minHarvesterBalance: 1000000000
 maxHarvesterBalance: 30000000000000
 minVoterBalance: 5000000000000
 networkType: 152
-identifier: testnet
 minNamespaceDuration: 1m
 assemblies: 'api, dual, peer'
 harvestBeneficiaryPercentage: 15
@@ -32,7 +31,7 @@ namespaceRentalFeeSinkAddressV1: TAXHVO2ODBITWC7YVAOC4QGHRM4U25AAOPM3ICI
 namespaceRentalFeeSinkAddress: TAXHVO2ODBITWC7YVAOC4QGHRM4U25AAOPM3ICI
 minPartnerNodeVersion: 1.0.1.0
 maxPartnerNodeVersion: 1.0.255.255
-epochAdjustment: 1616694977s
+epochAdjustment: 1638265052s
 enableRevoteOnBoot: false
 importanceGrouping: 720
 votingKeyDesiredLifetime: 720
@@ -43,11 +42,11 @@ maxVotingKeyLifetime: 360
 stepDuration: 4m
 maxBlockFutureTime: 500ms
 maxAccountRestrictionValues: 512
-defaultDynamicFeeMultiplier: 100000
-rootNamespaceRentalFeePerBlock: 2
+defaultDynamicFeeMultiplier: 100
+rootNamespaceRentalFeePerBlock: 1
 childNamespaceRentalFee: 55000
-totalVotingBalanceCalculationFix: 398520
-mosaicRentalFee: 40
+totalVotingBalanceCalculationFix: 1
+mosaicRentalFee: 55000
 throttlingBurst: 180
 throttlingRate: 160
 fileDatabaseBatchSize: 1 
