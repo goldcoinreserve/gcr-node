@@ -1,6 +1,6 @@
 # gcr-node
 
-https://img.shields.io/npm/v/@goldcoinreserve/gcr-node?label=%40goldcoinreserve%2Fgcr-node&style=plastic
+![gcr-node-npm](https://img.shields.io/npm/v/@goldcoinreserve/gcr-node?label=%40goldcoinreserve%2Fgcr-node&style=plastic)
 
 Tool that allows you creating, configuring and running gcr&#39;s complete networks or nodes to be sync with existing networks.
 
