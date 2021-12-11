@@ -1,6 +1,6 @@
 {
     "name": "@goldcoinreserve/gcr-node",
-    "description": "GCR tool that allows you creating, configuring and running Symbol's networks",
+    "description": "GCR tool that allows you creating, configuring and running GCR's network",
     "version": "1.1.1",
     "author": "GCR <info@goldcoinreserve.io>, Fernando Boucquez <fboucquez@gmail.com>",
     "bin": {
